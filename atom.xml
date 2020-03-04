@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://https://luxin-oi.github.io/</id>
     <title>luxin</title>
-    <updated>2020-03-04T16:01:03.018Z</updated>
+    <updated>2020-03-04T16:04:26.529Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://https://luxin-oi.github.io/"/>
     <link rel="self" href="https://https://luxin-oi.github.io/atom.xml"/>
@@ -11,7 +11,7 @@
     <icon>https://https://luxin-oi.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, luxin</rights>
     <entry>
-        <title type="html"><![CDATA[网站站]]></title>
+        <title type="html"><![CDATA[网站站呀]]></title>
         <id>https://https://luxin-oi.github.io/post/wang-zhan-zhan/</id>
         <link href="https://https://luxin-oi.github.io/post/wang-zhan-zhan/">
         </link>
