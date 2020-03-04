@@ -1,32 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://https://luxin-oi.github.io/</id>
+    <id>https://luxin-oi.github.io/</id>
     <title>luxin</title>
-    <updated>2020-03-04T17:24:42.946Z</updated>
+    <updated>2020-03-04T17:34:02.640Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://https://luxin-oi.github.io/"/>
-    <link rel="self" href="https://https://luxin-oi.github.io/atom.xml"/>
+    <link rel="alternate" href="https://luxin-oi.github.io/"/>
+    <link rel="self" href="https://luxin-oi.github.io/atom.xml"/>
     <subtitle>♥Andromeda♥</subtitle>
-    <logo>https://https://luxin-oi.github.io/images/avatar.png</logo>
-    <icon>https://https://luxin-oi.github.io/favicon.ico</icon>
+    <logo>https://luxin-oi.github.io/images/avatar.png</logo>
+    <icon>https://luxin-oi.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, luxin</rights>
     <entry>
+        <title type="html"><![CDATA[UOJ题单]]></title>
+        <id>https://luxin-oi.github.io/post/uoj-ti-dan/</id>
+        <link href="https://luxin-oi.github.io/post/uoj-ti-dan/">
+        </link>
+        <updated>2020-03-04T17:31:41.000Z</updated>
+        <content type="html"><![CDATA[<p>圆形障碍最短路-&gt;<a href="https://luxin-oi.github.io/post/thuwc2016-ding-xiang-yue-ye">uoj277定向越野</a></p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[题单索引]]></title>
-        <id>https://https://luxin-oi.github.io/post/ti-dan-suo-yin/</id>
-        <link href="https://https://luxin-oi.github.io/post/ti-dan-suo-yin/">
+        <id>https://luxin-oi.github.io/post/ti-dan-suo-yin/</id>
+        <link href="https://luxin-oi.github.io/post/ti-dan-suo-yin/">
         </link>
         <updated>2020-03-04T17:22:12.000Z</updated>
-        <content type="html"><![CDATA[<p>Atcoder题单</p>
-<p>BZOJ题单</p>
-<p>CF题单</p>
-<p>HDU题单</p>
-<p>POJ题单</p>
+        <content type="html"><![CDATA[<p><a href="https://luxin-oi.github.io/post/atcoder-ti-dan">Atcoder题单</a></p>
+<p><a href="https://luxin-oi.github.io/post/bzoj-ti-dan">BZOJ题单</a></p>
+<p><a href="https://luxin-oi.github.io/post/cf-ti-dan">CF题单</a></p>
+<p><a href="https://luxin-oi.github.io/post/hdu-ti-dan">HDU题单</a></p>
+<p><a href="https://luxin-oi.github.io/post/poj-ti-dan">POJ题单</a></p>
+<p><a href="https://luxin-oi.github.io/post/uoj-ti-dan">UOJ题单</a></p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[Atcoder题单]]></title>
-        <id>https://https://luxin-oi.github.io/post/atcoder-ti-dan/</id>
-        <link href="https://https://luxin-oi.github.io/post/atcoder-ti-dan/">
+        <id>https://luxin-oi.github.io/post/atcoder-ti-dan/</id>
+        <link href="https://luxin-oi.github.io/post/atcoder-ti-dan/">
         </link>
         <updated>2020-03-04T17:21:03.000Z</updated>
         <content type="html"><![CDATA[<p>咕咕咕</p>
@@ -34,8 +44,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[CF题单]]></title>
-        <id>https://https://luxin-oi.github.io/post/cf-ti-dan/</id>
-        <link href="https://https://luxin-oi.github.io/post/cf-ti-dan/">
+        <id>https://luxin-oi.github.io/post/cf-ti-dan/</id>
+        <link href="https://luxin-oi.github.io/post/cf-ti-dan/">
         </link>
         <updated>2020-03-04T17:20:22.000Z</updated>
         <content type="html"><![CDATA[<p>咕咕咕</p>
@@ -43,8 +53,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[HDU题单]]></title>
-        <id>https://https://luxin-oi.github.io/post/hdu-ti-dan/</id>
-        <link href="https://https://luxin-oi.github.io/post/hdu-ti-dan/">
+        <id>https://luxin-oi.github.io/post/hdu-ti-dan/</id>
+        <link href="https://luxin-oi.github.io/post/hdu-ti-dan/">
         </link>
         <updated>2020-03-04T17:19:50.000Z</updated>
         <content type="html"><![CDATA[<p>咕咕咕</p>
@@ -52,17 +62,17 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[BZOJ题单]]></title>
-        <id>https://https://luxin-oi.github.io/post/bzoj-ti-dan/</id>
-        <link href="https://https://luxin-oi.github.io/post/bzoj-ti-dan/">
+        <id>https://luxin-oi.github.io/post/bzoj-ti-dan/</id>
+        <link href="https://luxin-oi.github.io/post/bzoj-ti-dan/">
         </link>
         <updated>2020-03-04T17:18:35.000Z</updated>
         <content type="html"><![CDATA[<p>咕咕咕</p>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[POI题单]]></title>
-        <id>https://https://luxin-oi.github.io/post/poi-ti-dan/</id>
-        <link href="https://https://luxin-oi.github.io/post/poi-ti-dan/">
+        <title type="html"><![CDATA[POJ题单]]></title>
+        <id>https://luxin-oi.github.io/post/poj-ti-dan/</id>
+        <link href="https://luxin-oi.github.io/post/poj-ti-dan/">
         </link>
         <updated>2020-03-04T17:17:13.000Z</updated>
         <content type="html"><![CDATA[<p>咕咕咕</p>
@@ -70,8 +80,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[图论总结（伪）]]></title>
-        <id>https://https://luxin-oi.github.io/post/tu-lun-zong-jie-wei/</id>
-        <link href="https://https://luxin-oi.github.io/post/tu-lun-zong-jie-wei/">
+        <id>https://luxin-oi.github.io/post/tu-lun-zong-jie-wei/</id>
+        <link href="https://luxin-oi.github.io/post/tu-lun-zong-jie-wei/">
         </link>
         <updated>2020-03-04T17:13:38.000Z</updated>
         <content type="html"><![CDATA[<h2 id="图论总结">图论总结</h2>
@@ -2668,8 +2678,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[Splay维护序列]]></title>
-        <id>https://https://luxin-oi.github.io/post/splay-wei-hu-xu-lie/</id>
-        <link href="https://https://luxin-oi.github.io/post/splay-wei-hu-xu-lie/">
+        <id>https://luxin-oi.github.io/post/splay-wei-hu-xu-lie/</id>
+        <link href="https://luxin-oi.github.io/post/splay-wei-hu-xu-lie/">
         </link>
         <updated>2020-03-04T17:08:22.000Z</updated>
         <content type="html"><![CDATA[<pre><code>/*
@@ -2872,8 +2882,8 @@ signed main(){
     </entry>
     <entry>
         <title type="html"><![CDATA[最小圆覆盖（随机增量）]]></title>
-        <id>https://https://luxin-oi.github.io/post/zui-xiao-yuan-fu-gai-sui-ji-zeng-liang/</id>
-        <link href="https://https://luxin-oi.github.io/post/zui-xiao-yuan-fu-gai-sui-ji-zeng-liang/">
+        <id>https://luxin-oi.github.io/post/zui-xiao-yuan-fu-gai-sui-ji-zeng-liang/</id>
+        <link href="https://luxin-oi.github.io/post/zui-xiao-yuan-fu-gai-sui-ji-zeng-liang/">
         </link>
         <updated>2020-03-04T17:06:34.000Z</updated>
         <content type="html"><![CDATA[<pre><code>#include &lt;algorithm&gt;
@@ -2951,89 +2961,6 @@ signed main(){
             }
         }
     printf(&quot;%.10lf\n%.10lf %.10lf\n&quot;, sqrt(r2), o.x, o.y);
-    return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[旋转卡壳]]></title>
-        <id>https://https://luxin-oi.github.io/post/xuan-zhuan-qia-ke/</id>
-        <link href="https://https://luxin-oi.github.io/post/xuan-zhuan-qia-ke/">
-        </link>
-        <updated>2020-03-04T17:05:30.000Z</updated>
-        <content type="html"><![CDATA[<pre><code>// p1452
-#include &lt;algorithm&gt;
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;cctype&gt;
-#include &lt;cmath&gt;
-using namespace std;
-#define I inline
-#define R register
-#define inf 1073742823
-#define FOR(i,begin,end) for(R int i=begin;i&lt;=end;++i)
-#define ROF(i,begin,end) for(R int i=begin;i&gt;=end;--i)
-
-const int maxn = 200000+20;
-
-const double eps=1e-10;
-const double pi=acos(-1.0);
-I int dcmp(double x)
-{   if(fabs(x)&lt;eps)return 0;
-    else return x&lt;0?-1:1;}
-#define P point
-#define PP const P &amp;
-struct point{
-    double x,y;
-    I P(const double &amp;_x=0,const double &amp;_y=0):x(_x),y(_y){}
-    I bool operator ==(PP a)const{return dcmp(x-a.x)==0&amp;&amp;dcmp(y-a.y)==0;}
-    I bool operator&lt;(PP a)const{return x&lt;a.x||(x==a.x&amp;&amp;y&lt;a.y);}
-    I P operator+(PP a)const{return P(x+a.x,y+a.y);}
-    I P operator-(PP a)const{return P(x-a.x,y-a.y);}
-    I P operator*(const double a)const{return P(x*a,y*a);}
-    I P operator/(const double a)const{return P(x/a,y/a);}
-    I P operator*(PP a)const{return P(x*a.x-y*a.y,x*a.y+y*a.x);}
-    I double len()const{return sqrt(x*x+y*y);}
-    I double len2()const{return x*x+y*y;}
-    I P rotate(const double theta)const{return P(x,y)*P(cos(theta),sin(theta));}
-    I double operator|(PP a)const{return x*a.x+y*a.y;}
-    I double operator&amp;(PP a)const{return x*a.y-y*a.x;}
-    I P norm(){return *this/len();}
-    I double angle(PP a)const{return *this|a/len()/a.len();}
-}p[maxn],s[maxn];
-int n,top;
-typedef point vec;
-
-I bool cmp(PP a,PP b){
-    vec p1=a-p[1],p2=b-p[1];
-    double k=(p1)&amp;(p2);
-    if(dcmp(k)==1)return 1;
-    if(dcmp(k)==0&amp;&amp;p1.len2()&lt;p2.len2())return 1;
-    return 0;
-}
-
-signed main(){
-    scanf(&quot;%d&quot;,&amp;n);
-    FOR(i,1,n){
-        scanf(&quot;%lf%lf&quot;,&amp;p[i].x,&amp;p[i].y);
-        if(p[i]&lt;p[1])swap(p[1],p[i]);
-    }
-    sort(p+2,p+1+n,cmp);
-    s[top=1]=p[1];
-    FOR(i,2,n){
-        while(top&gt;1&amp;&amp;(dcmp((s[top]-s[top-1])&amp;(p[i]-s[top])))&lt;=0)top--;
-        s[++top]=p[i];
-    }
-    s[0]=s[top];
-    int j=2;
-    double ans=0;
-    for(int i=0;i&lt;top;++i){
-        while(((s[i + 1] - s[i]) &amp; (s[j] - s[i])) &lt; ((s[i + 1] - s[i]) &amp; (s[j + 1] - s[i])))j=(j+1)%n;
-        ans=max(ans, max((s[i+1]-s[j]).len2(),(s[i]-s[j]).len2()));
-    }
-    printf(&quot;%d&quot;,(int)ans);
     return 0;
 }
 </code></pre>
