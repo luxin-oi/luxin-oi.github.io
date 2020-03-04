@@ -50,24 +50,88 @@
         <main id="main" class="site-main" role="main">
             <article id="post-1270" class="post-1270 post type-post status-publish format-standard hentry category-90 category-129 tag-149">
                 <header class="entry-header">
-                    <h1 class="entry-title">网站站呀</h1>
-                    <p class="entry-census">发布于 2020-03-04</p>
+                    <h1 class="entry-title">ISAP</h1>
+                    <p class="entry-census">发布于 2020-03-05</p>
                     <hr>
                 </header>
                 <div class="neko">
-                    <p><a href="https://csacademy.com/app/graph_editor/">graph editor</a></p>
-<p><a href="https://www.desmos.com/calculator">Desmos</a></p>
-<p><a href="http://oeis.org/?language=chineseS">OEIS</a></p>
-<p><a href="https://www.mdeditor.com/">Mdeditor</a></p>
-<p><a href="https://carbon.now.sh/">Carbon</a></p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color">Color</a></p>
-<p><a href="https://oi-archive.memset0.cn/">oi-archive</a></p>
-<p><a href="https://oi-wiki.org/">OI-wiki</a></p>
-<p><a href="https://www.luogu.com.cn/blog/IowaBattleship/latex-gong-shi-tai-quan">Latex</a></p>
-<p><a href="https://www.runoob.com/">菜鸟教程</a></p>
-<p><a href="https://projecteuler.net/archives">Project Euler</a></p>
-<p><a href="https://trello.com/b/pDFlBKeg/oi%E7%BB%BC%E5%90%88%E9%A2%98%E5%8D%95">OI题单</a></p>
-<p><a href="https://www.geogebra.org/geometry">geometry</a></p>
+                    <pre><code>#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;cctype&gt;
+#include &lt;cmath&gt;
+using namespace std;
+#define I inline
+#define R register
+#define inf 1073742823
+#define FOR(i,begin,end) for(R int i=begin;i&lt;=end;++i)
+#define ROF(i,begin,end) for(R int i=begin;i&gt;=end;--i)
+#include&lt;queue&gt;
+namespace IO{
+    char buf[1&lt;&lt;21],*pa=buf,*pb=buf;
+    char buffer[1&lt;&lt;21];int p1=-1;const int p2=(1&lt;&lt;21)-1; 
+    I char gc(){return pa==pb&amp;&amp;(pb=(pa=buf)+fread(buf,1,1&lt;&lt;21,stdin),pa==pb)?EOF:*pa++;}
+    template&lt;class T&gt;I void read(T &amp;x){
+        x=0;R int y=0;R char ch=gc();
+        for(;!isdigit(ch);ch=gc())y=ch=='-';
+        for(;isdigit(ch);ch=gc())x=x*10+(ch^48);
+        (y)&amp;&amp;(x=-x);return;}
+    I void flush(){fwrite(buffer,1,p1+1,stdout);p1=-1;return;}
+    I void pc(int ch){if(p1==p2)flush();buffer[++p1]=ch;return;}
+    template&lt;class T&gt;I void write(T x){
+        static char buf[20];static int len =-1;
+        if(x&gt;=0){do buf[++len]=(x%10)^48,x/=10;while(x);}
+        else{pc('-');do buf[++len]=(-(x%10))^48,x/=10;while(x);}
+        while(len&gt;=0)pc(buf[len--]);
+        return;}
+}
+using namespace IO;
+int n,m,s,t;
+const int maxn = 50000+50;
+const int maxm = 200000+200;
+#define ci const int &amp;
+struct edge{
+    int u,v,f,n;
+    I edge(ci uu =0,ci vv=0,ci ff=0,ci nn=0):u(uu),v(vv),f(ff),n(nn){}
+
+}e[maxm];
+int cnt=1,head[maxn],cur[maxn],gap[maxn],dis[maxn],mxflow=0;
+I void add(ci u,ci v,ci f){
+    e[++cnt]=edge(u,v,f,head[u]),head[u]=cnt;
+    e[++cnt]=edge(v,u,0,head[v]),head[v]=cnt;
+}
+I void bfs(){
+    queue&lt;int&gt;q;q.push(t),gap[dis[t]=1]++;
+    while(!q.empty()){
+        int u=q.front();q.pop();
+        for(int ee=head[u],v;v=e[ee].v,ee;ee=e[ee].n)
+        if(!dis[v])gap[dis[v]=dis[u]+1]++,q.push(v);
+    }
+}
+int dfs(ci u,ci flow){
+    if(u==t&amp;&amp;((mxflow+=flow)||1))return flow;
+    int us=0,f;
+    for(int ee=cur[u],v;cur[u]=ee,v=e[ee].v,ee;ee=e[ee].n)
+        if(dis[v]==dis[u]-1){
+            if(f=dfs(v,min(flow-us,e[ee].f)))
+                e[ee].f-=f,e[ee^1].f+=f,us+=f;
+            if(us==flow)return flow;
+        }
+    (--gap[dis[u]])?(++gap[++dis[u]]):dis[s]=n+1;
+    return us;
+}
+signed main(){
+    int u,v,f;
+    read(n),read(m),read(s),read(t);
+    FOR(i,1,m)read(u),read(v),read(f),add(u,v,f);
+    bfs();
+    while(dis[s]&lt;=n+1)memcpy(cur,head,sizeof head),dfs(s,inf);
+    write(mxflow);
+    flush();
+    return 0;
+}
+</code></pre>
 
                 </div>
             </article>
@@ -77,20 +141,20 @@
         <div class="mdui-container">
             <div class="mdui-row">
                 
-                <a href="https://https://luxin-oi.github.io/post/miller_rabin/" class="mdui-ripple mdui-color-theme mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left">
+                <a href="https://https://luxin-oi.github.io/post/dinic/" class="mdui-ripple mdui-color-theme mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left">
                     <div class="doc-footer-nav-text">
                         <i class="mdui-icon material-icons">arrow_back</i>
                         <span class="doc-footer-nav-direction mdui-hidden-xs-down">上一篇文章</span>
-                        <div class="doc-footer-nav-chapter mdui-hidden-xs-down">Miller_Rabin</div>
+                        <div class="doc-footer-nav-chapter mdui-hidden-xs-down">Dinic</div>
                     </div>
                 </a>
                 
                 
-                <a href="https://https://luxin-oi.github.io/post/thuwc2016-ding-xiang-yue-ye/" class="mdui-ripple mdui-color-theme mdui-col-xs-10 mdui-col-sm-6 doc-footer-nav-right">
+                <a href="https://https://luxin-oi.github.io/post/miller_rabin/" class="mdui-ripple mdui-color-theme mdui-col-xs-10 mdui-col-sm-6 doc-footer-nav-right">
                     <div class="doc-footer-nav-text">
                         <i class="mdui-icon material-icons">arrow_forward</i>
                         <span class="doc-footer-nav-direction">下一篇文章</span>
-                        <div class="doc-footer-nav-chapter">THUWC2016 定向越野</div>
+                        <div class="doc-footer-nav-chapter">Miller_Rabin</div>
                     </div>
                 </a>
                 

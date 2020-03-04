@@ -50,24 +50,207 @@
         <main id="main" class="site-main" role="main">
             <article id="post-1270" class="post-1270 post type-post status-publish format-standard hentry category-90 category-129 tag-149">
                 <header class="entry-header">
-                    <h1 class="entry-title">网站站呀</h1>
-                    <p class="entry-census">发布于 2020-03-04</p>
+                    <h1 class="entry-title">Splay维护序列</h1>
+                    <p class="entry-census">发布于 2020-03-05</p>
                     <hr>
                 </header>
                 <div class="neko">
-                    <p><a href="https://csacademy.com/app/graph_editor/">graph editor</a></p>
-<p><a href="https://www.desmos.com/calculator">Desmos</a></p>
-<p><a href="http://oeis.org/?language=chineseS">OEIS</a></p>
-<p><a href="https://www.mdeditor.com/">Mdeditor</a></p>
-<p><a href="https://carbon.now.sh/">Carbon</a></p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color">Color</a></p>
-<p><a href="https://oi-archive.memset0.cn/">oi-archive</a></p>
-<p><a href="https://oi-wiki.org/">OI-wiki</a></p>
-<p><a href="https://www.luogu.com.cn/blog/IowaBattleship/latex-gong-shi-tai-quan">Latex</a></p>
-<p><a href="https://www.runoob.com/">菜鸟教程</a></p>
-<p><a href="https://projecteuler.net/archives">Project Euler</a></p>
-<p><a href="https://trello.com/b/pDFlBKeg/oi%E7%BB%BC%E5%90%88%E9%A2%98%E5%8D%95">OI题单</a></p>
-<p><a href="https://www.geogebra.org/geometry">geometry</a></p>
+                    <pre><code>/*
+ * @Author: luxin 
+ * @Date: 2020-02-08 14:43:55 
+ * @Last Modified by: luxin
+ * @Last Modified time: 2020-02-20 20:37:51
+ */
+#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;cctype&gt;
+#include &lt;cmath&gt;
+using namespace std;
+#define I inline
+#define R register
+#define inf 107374282
+#define FOR(i,begin,end) for(R int i=begin;i&lt;=end;++i)
+#define ROF(i,begin,end) for(R int i=begin;i&gt;=end;--i)
+#define maxn 1000010
+#define tagnone 10000110
+int a[maxn],n,m;
+struct luna{
+    int child[2],parent,size,sum,value,left,right,mid,rev,tag;
+    I void clear(){child[1]=child[0]=parent=value=rev=0,tag=tagnone;}
+}tr[maxn];
+#define ls tr[o].child[0]
+#define rs tr[o].child[1]
+int id[maxn],cnt,rub[maxn],top,root;
+I int rubbish(){
+    return top?rub[top--]:++cnt;
+}
+I void change_value(int o,int val){
+    if(!o)return;
+    tr[o].tag=tr[o].value=val,
+    tr[o].sum=val*tr[o].size,
+    tr[o].left=tr[o].right=max(0,tr[o].sum),
+    tr[o].mid=max(tr[o].sum,tr[o].value);
+}
+I void change_rev(int o){
+    swap(ls,rs);
+    swap(tr[o].left,tr[o].right);
+    tr[o].rev^=1;
+}
+I void pushup(int o){
+    luna&amp;x=tr[ls],
+        &amp;y=tr[rs],
+        &amp;res=tr[o];
+    res.sum=x.sum+y.sum+res.value;
+    res.size=x.size+y.size+1;
+    res.right=max(y.right,x.right+res.value+y.sum);
+    res.left=max(x.left,y.left+res.value+x.sum);
+    res.mid=max(max(x.mid,y.mid),x.right+y.left+res.value);
+}
+I void pushdown(int o){
+    if(tr[o].tag!=tagnone){
+        change_value(ls,tr[o].tag);
+        change_value(rs,tr[o].tag);
+        tr[o].tag=tagnone;
+    }
+    if(tr[o].rev){
+        change_rev(ls);
+        change_rev(rs);
+        tr[o].rev=0;
+    }
+}
+I bool identify(int o){
+    return tr[tr[o].parent].child[1]==o;
+}
+I void connect(int o,int pa,bool flag){
+    tr[o].parent=pa;
+    tr[pa].child[flag]=o;
+}
+I void rotate(int x){
+    int y=tr[x].parent;
+    int r=tr[y].parent;
+    bool flag_x=identify(x);
+    bool flag_y=identify(y);
+    int b=tr[x].child[!flag_x];
+    connect(b,y,flag_x);
+    connect(y,x,!flag_x);
+    connect(x,r,flag_y);
+    pushup(y),pushup(x);
+}
+I void splay(int at,int to){
+    while(tr[at].parent!=to){
+        int pa=tr[at].parent;
+        if(tr[pa].parent!=to)
+            identify(at)==identify(pa)?rotate(pa):rotate(at);
+            rotate(at);
+    }
+    if(!to)root=at;
+}
+I void New(int o,int val){
+    tr[o].mid=tr[o].sum=val;
+    tr[o].tag=tagnone;
+    tr[o].rev=0;
+    tr[o].left=tr[o].right=max(val,0);
+    tr[o].size=1;
+    tr[o].value=val;
+}
+I void build(int l,int r,int fa){
+    int mid=(l+r)&gt;&gt;1;
+    int o=id[mid],pre=id[fa];
+    if(l==r)New(o,a[l]);
+    if(l&lt;mid)build(l,mid-1,mid);
+    if(r&gt;mid)build(mid+1,r,mid);
+    tr[o].value=a[mid],tr[o].parent=pre,tr[o].tag=tagnone;
+    pushup(o);
+    tr[pre].child[mid&gt;=fa]=o;
+}
+I int kth(int x){
+    int o=root;
+    while(233){
+        pushdown(o);
+        if(tr[ls].size&gt;=x)o=ls;
+        else{
+            if(tr[ls].size+1==x)return o;
+            else x-=tr[ls].size+1,o=rs;
+        }
+    }
+    return inf;
+}
+I void remove(int o){
+    if(ls)remove(ls);
+    if(rs)remove(rs);
+    rub[++top]=o;
+    tr[o].clear();
+}
+I int split(int k,int len){
+    int x=kth(k),y=kth(k+len+1);
+    splay(x,0),splay(y,x);
+    return tr[y].child[0];
+}
+I void query(int k,int len){
+    int node=split(k,len);
+    printf(&quot;%d\n&quot;,tr[node].sum);
+}
+I void update(int x,int len,int val){
+    int o=split(x,len);
+    int y=tr[o].parent;
+    change_value(o,val);
+    pushup(y),pushup(tr[y].parent);
+}
+I void reverse(int x,int len){   
+    int o=split(x,len);
+    int y=tr[o].parent;
+    change_rev(o);
+    pushup(y),pushup(tr[y].parent);
+}
+I void eraser(int x,int len){
+    int o=split(x,len);
+    int y=tr[o].parent;
+    remove(o);
+    tr[y].child[0]=0;
+    pushup(y),pushup(tr[y].parent);
+}
+I void insert(int k,int len){
+    for(int i=1;i&lt;=len;++i)
+        scanf(&quot;%d&quot;,&amp;a[i]),
+        id[i]=rubbish();
+    build(1,len,0);
+    int z=id[(1+len)&gt;&gt;1];
+    int x=kth(k+1),y=kth(k+2);
+    splay(x,0),splay(y,x);
+    tr[y].child[0]=z;
+    tr[z].parent=y;
+    pushup(y),pushup(tr[y].parent);
+}
+#define online
+signed main(){
+#ifndef online
+    freopen(&quot;test.in&quot;,&quot;r&quot;,stdin);
+    freopen(&quot;test.out&quot;,&quot;w&quot;,stdout);
+#endif
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    tr[0].mid=a[1]=a[n+2]=-inf;
+    for(int i=1;i&lt;=n;++i)scanf(&quot;%d&quot;,&amp;a[i+1]);
+    for(int i=1;i&lt;=n+2;++i)id[i]=i;
+    build(1,n+2,0);
+    root=(n+3)&gt;&gt;1;
+    cnt=n+2;
+    for(int i=1;i&lt;=m;++i){
+        string s;int x,len,y;
+        cin&gt;&gt;s;
+        if(s!=&quot;MAX-SUM&quot;)scanf(&quot;%d%d&quot;,&amp;x,&amp;len);
+        else printf(&quot;%d\n&quot;,tr[root].mid);
+        if(s==&quot;INSERT&quot;)insert(x,len);
+        if(s==&quot;DELETE&quot;)eraser(x,len);
+        if(s==&quot;MAKE-SAME&quot;)
+            scanf(&quot;%d&quot;,&amp;y),update(x,len,y);
+        if(s==&quot;REVERSE&quot;)reverse(x,len);
+        if(s==&quot;GET-SUM&quot;)query(x,len);
+    }
+    return 0;
+}
+</code></pre>
 
                 </div>
             </article>
@@ -77,20 +260,14 @@
         <div class="mdui-container">
             <div class="mdui-row">
                 
-                <a href="https://https://luxin-oi.github.io/post/miller_rabin/" class="mdui-ripple mdui-color-theme mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left">
-                    <div class="doc-footer-nav-text">
-                        <i class="mdui-icon material-icons">arrow_back</i>
-                        <span class="doc-footer-nav-direction mdui-hidden-xs-down">上一篇文章</span>
-                        <div class="doc-footer-nav-chapter mdui-hidden-xs-down">Miller_Rabin</div>
-                    </div>
-                </a>
+                <div class="mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left"></div>
                 
                 
-                <a href="https://https://luxin-oi.github.io/post/thuwc2016-ding-xiang-yue-ye/" class="mdui-ripple mdui-color-theme mdui-col-xs-10 mdui-col-sm-6 doc-footer-nav-right">
+                <a href="https://https://luxin-oi.github.io/post/zui-xiao-yuan-fu-gai-sui-ji-zeng-liang/" class="mdui-ripple mdui-color-theme mdui-col-xs-10 mdui-col-sm-6 doc-footer-nav-right">
                     <div class="doc-footer-nav-text">
                         <i class="mdui-icon material-icons">arrow_forward</i>
                         <span class="doc-footer-nav-direction">下一篇文章</span>
-                        <div class="doc-footer-nav-chapter">THUWC2016 定向越野</div>
+                        <div class="doc-footer-nav-chapter">最小圆覆盖（随机增量）</div>
                     </div>
                 </a>
                 
