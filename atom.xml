@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://luxin-oi.github.io/</id>
+    <id>http://localhost:4000</id>
     <title>luxin</title>
-    <updated>2020-03-04T17:34:02.640Z</updated>
+    <updated>2020-03-04T17:36:35.181Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://luxin-oi.github.io/"/>
-    <link rel="self" href="https://luxin-oi.github.io/atom.xml"/>
+    <link rel="alternate" href="http://localhost:4000"/>
+    <link rel="self" href="http://localhost:4000/atom.xml"/>
     <subtitle>♥Andromeda♥</subtitle>
-    <logo>https://luxin-oi.github.io/images/avatar.png</logo>
-    <icon>https://luxin-oi.github.io/favicon.ico</icon>
+    <logo>http://localhost:4000/images/avatar.png</logo>
+    <icon>http://localhost:4000/favicon.ico</icon>
     <rights>All rights reserved 2020, luxin</rights>
     <entry>
         <title type="html"><![CDATA[UOJ题单]]></title>
-        <id>https://luxin-oi.github.io/post/uoj-ti-dan/</id>
-        <link href="https://luxin-oi.github.io/post/uoj-ti-dan/">
+        <id>http://localhost:4000/post/uoj-ti-dan/</id>
+        <link href="http://localhost:4000/post/uoj-ti-dan/">
         </link>
         <updated>2020-03-04T17:31:41.000Z</updated>
         <content type="html"><![CDATA[<p>圆形障碍最短路-&gt;<a href="https://luxin-oi.github.io/post/thuwc2016-ding-xiang-yue-ye">uoj277定向越野</a></p>
@@ -21,8 +21,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[题单索引]]></title>
-        <id>https://luxin-oi.github.io/post/ti-dan-suo-yin/</id>
-        <link href="https://luxin-oi.github.io/post/ti-dan-suo-yin/">
+        <id>http://localhost:4000/post/ti-dan-suo-yin/</id>
+        <link href="http://localhost:4000/post/ti-dan-suo-yin/">
         </link>
         <updated>2020-03-04T17:22:12.000Z</updated>
         <content type="html"><![CDATA[<p><a href="https://luxin-oi.github.io/post/atcoder-ti-dan">Atcoder题单</a></p>
@@ -35,8 +35,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Atcoder题单]]></title>
-        <id>https://luxin-oi.github.io/post/atcoder-ti-dan/</id>
-        <link href="https://luxin-oi.github.io/post/atcoder-ti-dan/">
+        <id>http://localhost:4000/post/atcoder-ti-dan/</id>
+        <link href="http://localhost:4000/post/atcoder-ti-dan/">
         </link>
         <updated>2020-03-04T17:21:03.000Z</updated>
         <content type="html"><![CDATA[<p>咕咕咕</p>
@@ -44,8 +44,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[CF题单]]></title>
-        <id>https://luxin-oi.github.io/post/cf-ti-dan/</id>
-        <link href="https://luxin-oi.github.io/post/cf-ti-dan/">
+        <id>http://localhost:4000/post/cf-ti-dan/</id>
+        <link href="http://localhost:4000/post/cf-ti-dan/">
         </link>
         <updated>2020-03-04T17:20:22.000Z</updated>
         <content type="html"><![CDATA[<p>咕咕咕</p>
@@ -53,8 +53,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[HDU题单]]></title>
-        <id>https://luxin-oi.github.io/post/hdu-ti-dan/</id>
-        <link href="https://luxin-oi.github.io/post/hdu-ti-dan/">
+        <id>http://localhost:4000/post/hdu-ti-dan/</id>
+        <link href="http://localhost:4000/post/hdu-ti-dan/">
         </link>
         <updated>2020-03-04T17:19:50.000Z</updated>
         <content type="html"><![CDATA[<p>咕咕咕</p>
@@ -62,8 +62,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[BZOJ题单]]></title>
-        <id>https://luxin-oi.github.io/post/bzoj-ti-dan/</id>
-        <link href="https://luxin-oi.github.io/post/bzoj-ti-dan/">
+        <id>http://localhost:4000/post/bzoj-ti-dan/</id>
+        <link href="http://localhost:4000/post/bzoj-ti-dan/">
         </link>
         <updated>2020-03-04T17:18:35.000Z</updated>
         <content type="html"><![CDATA[<p>咕咕咕</p>
@@ -71,8 +71,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[POJ题单]]></title>
-        <id>https://luxin-oi.github.io/post/poj-ti-dan/</id>
-        <link href="https://luxin-oi.github.io/post/poj-ti-dan/">
+        <id>http://localhost:4000/post/poj-ti-dan/</id>
+        <link href="http://localhost:4000/post/poj-ti-dan/">
         </link>
         <updated>2020-03-04T17:17:13.000Z</updated>
         <content type="html"><![CDATA[<p>咕咕咕</p>
@@ -80,8 +80,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[图论总结（伪）]]></title>
-        <id>https://luxin-oi.github.io/post/tu-lun-zong-jie-wei/</id>
-        <link href="https://luxin-oi.github.io/post/tu-lun-zong-jie-wei/">
+        <id>http://localhost:4000/post/tu-lun-zong-jie-wei/</id>
+        <link href="http://localhost:4000/post/tu-lun-zong-jie-wei/">
         </link>
         <updated>2020-03-04T17:13:38.000Z</updated>
         <content type="html"><![CDATA[<h2 id="图论总结">图论总结</h2>
@@ -2678,8 +2678,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[Splay维护序列]]></title>
-        <id>https://luxin-oi.github.io/post/splay-wei-hu-xu-lie/</id>
-        <link href="https://luxin-oi.github.io/post/splay-wei-hu-xu-lie/">
+        <id>http://localhost:4000/post/splay-wei-hu-xu-lie/</id>
+        <link href="http://localhost:4000/post/splay-wei-hu-xu-lie/">
         </link>
         <updated>2020-03-04T17:08:22.000Z</updated>
         <content type="html"><![CDATA[<pre><code>/*
@@ -2882,8 +2882,8 @@ signed main(){
     </entry>
     <entry>
         <title type="html"><![CDATA[最小圆覆盖（随机增量）]]></title>
-        <id>https://luxin-oi.github.io/post/zui-xiao-yuan-fu-gai-sui-ji-zeng-liang/</id>
-        <link href="https://luxin-oi.github.io/post/zui-xiao-yuan-fu-gai-sui-ji-zeng-liang/">
+        <id>http://localhost:4000/post/zui-xiao-yuan-fu-gai-sui-ji-zeng-liang/</id>
+        <link href="http://localhost:4000/post/zui-xiao-yuan-fu-gai-sui-ji-zeng-liang/">
         </link>
         <updated>2020-03-04T17:06:34.000Z</updated>
         <content type="html"><![CDATA[<pre><code>#include &lt;algorithm&gt;
