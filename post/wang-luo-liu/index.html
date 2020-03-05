@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>luxin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/css/mdui.min.css">
+    <link rel="stylesheet" href="/media/css/post.css">
+    <link rel="stylesheet" href="/media/live2d/css/live2d.css" />
+    
+</head>
+<body class=" mdui-appbar-with-toolbar  mdui-theme-primary-pink mdui-theme-accent-pink">
+<header class="mdui-toolbar mdui-color-pink mdui-appbar-fixed mdui-appbar-scroll-toolbar-hide" style="z-index: 1000">
+    <a href="javascript:;" mdui-drawer="{target: '#left-drawer',overlay:true}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+    <span class="mdui-typo-title">luxin</span>
+    <div class="mdui-toolbar-spacer"></div>
+<!--    <a href="javascript:history.go(0);" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+    <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+</header>
+
+<div class="mdui-drawer mdui-color-white mdui-drawer-full-height mdui-drawer-close" id="left-drawer">
+    <ul class="mdui-list">
+        <li class="mdui-subheader">菜单</li>
+        
+        <li class="mdui-list-item mdui-ripple">
+            <a href="/" class="mdui-list-item-content">首页</a>
+        </li>
+        
+        <li class="mdui-list-item mdui-ripple">
+            <a href="/archives" class="mdui-list-item-content">归档</a>
+        </li>
+        
+        <li class="mdui-list-item mdui-ripple">
+            <a href="/tags" class="mdui-list-item-content">标签</a>
+        </li>
+        
+        <li class="mdui-list-item mdui-ripple">
+            <a href="/post/about" class="mdui-list-item-content">关于</a>
+        </li>
+        
+        <li class="mdui-list-item mdui-ripple">
+            <a href="https://luxin-oi.github.io/post/ti-dan-suo-yin" class="mdui-list-item-content">题单</a>
+        </li>
+        
+    </ul>
+</div>
+
+<div id="content" class="site-content">
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main" role="main">
+            <article id="post-1270" class="post-1270 post type-post status-publish format-standard hentry category-90 category-129 tag-149">
+                <header class="entry-header">
+                    <h1 class="entry-title">网络流</h1>
+                    <p class="entry-census">发布于 2020-03-06</p>
+                    <hr>
+                </header>
+                <div class="neko">
+                    <p><s>很久之前就想要学习网络流了，最近也刚学了网络流，于是便有了本篇博客。</s></p>
+<h2 id="关于算法">关于算法：</h2>
+<h3 id="dinic众所周知网络流不卡dinic">Dinic（<strong>众所周知网络流不卡Dinic</strong>）：</h3>
+<pre><code>#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;cctype&gt;
+#include &lt;cmath&gt;
+using namespace std;
+#define I inline
+#define R register
+#define inf 1073742823
+#define FOR(i,begin,end) for(R int i=begin;i&lt;=end;++i)
+#define ROF(i,begin,end) for(R int i=begin;i&gt;=end;--i)
+
+namespace IO{
+    char buf[1&lt;&lt;21],*pa=buf,*pb=buf;
+    char buffer[1&lt;&lt;21];int p1=-1;const int p2=(1&lt;&lt;21)-1; 
+    I char gc(){return pa==pb&amp;&amp;(pb=(pa=buf)+fread(buf,1,1&lt;&lt;21,stdin),pa==pb)?EOF:*pa++;}
+    template&lt;class T&gt;I void read(T &amp;x){
+        x=0;R int y=0;R char ch=gc();
+        for(;!isdigit(ch);ch=gc())y=ch=='-';
+        for(;isdigit(ch);ch=gc())x=x*10+(ch^48);
+        (y)&amp;&amp;(x=-x);return;}
+    I void flush(){fwrite(buffer,1,p1+1,stdout);p1=-1;return;}
+    I void pc(int ch){if(p1==p2)flush();buffer[++p1]=ch;return;}
+    template&lt;class T&gt;I void write(T x){
+        static char buf[20];static int len =-1;
+        if(x&gt;=0){do buf[++len]=(x%10)^48,x/=10;while(x);}
+        else{pc('-');do buf[++len]=(-(x%10))^48,x/=10;while(x);}
+        while(len&gt;=0)pc(buf[len--]);
+        return;}
+}
+using namespace IO;
+
+const int maxn = 50000+50;
+const int maxm = 200000+200;
+#define Ci const int &amp;
+
+int n,m,s,t;
+
+struct edge{
+    int u,v,n,flow;
+    I edge(Ci _u=0,Ci _v=0,Ci _n=0,Ci _flow=0):u(_u),v(_v),n(_n),flow(_flow){}
+}e[maxm];
+int cnt=1,head[maxn],cur[maxn];
+I void add(Ci u,Ci v,Ci flow){
+    e[++cnt]=edge(u,v,head[u],flow),head[u]=cnt;
+    e[++cnt]=edge(v,u,head[v],0),head[v]=cnt;
+}
+
+int dep[maxn];
+#include&lt;queue&gt;
+I bool bfs(){
+    queue&lt;int&gt;q;
+    memset(dep,0,sizeof dep);
+    memcpy(cur,head,sizeof(head));
+    dep[s]=1,q.push(s);
+    while(!q.empty()){
+        int u=q.front();q.pop();
+        for(int ee=head[u],v;v=e[ee].v,ee;ee=e[ee].n)
+            if(e[ee].flow&amp;&amp;dep[v]==0)
+                dep[v]=dep[u]+1,q.push(v);
+    }
+    return dep[t];
+}
+int dfs(int u,int limit){
+    if(limit==0||u==t)return limit;
+    int flow=0,f;
+    for(int ee=cur[u],v;cur[u]=ee,v=e[ee].v,ee;ee=e[ee].n)
+        if(dep[v]==dep[u]+1&amp;&amp;(f=dfs(v,min(limit,e[ee].flow)))){
+            flow+=f;
+            limit-=f;
+            e[ee].flow-=f;
+            e[ee^1].flow+=f;
+            if(!limit)break;
+        }
+    return flow;
+}
+I int dinic(){
+    int ans=0;
+    while(bfs())
+            ans+=dfs(s,inf);
+        return ans;
+}
+signed main(){
+    read(n),read(m),read(s),read(t);
+    int u,v,f;
+    FOR(i,1,m)
+        read(u),read(v),read(f),
+        add(u,v,f);
+    write(dinic());
+    flush();
+    return 0;
+}
+</code></pre>
+<h3 id="isap它会更快点">ISAP（它会更快点）：</h3>
+<pre><code>#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;cctype&gt;
+#include &lt;cmath&gt;
+using namespace std;
+#define I inline
+#define R register
+#define inf 1073742823
+#define FOR(i,begin,end) for(R int i=begin;i&lt;=end;++i)
+#define ROF(i,begin,end) for(R int i=begin;i&gt;=end;--i)
+
+namespace IO{
+    char buf[1&lt;&lt;21],*pa=buf,*pb=buf;
+    char buffer[1&lt;&lt;21];int p1=-1;const int p2=(1&lt;&lt;21)-1; 
+    I char gc(){return pa==pb&amp;&amp;(pb=(pa=buf)+fread(buf,1,1&lt;&lt;21,stdin),pa==pb)?EOF:*pa++;}
+    template&lt;class T&gt;I void read(T &amp;x){
+        x=0;R int y=0;R char ch=gc();
+        for(;!isdigit(ch);ch=gc())y=ch=='-';
+        for(;isdigit(ch);ch=gc())x=x*10+(ch^48);
+        (y)&amp;&amp;(x=-x);return;}
+    I void flush(){fwrite(buffer,1,p1+1,stdout);p1=-1;return;}
+    I void pc(int ch){if(p1==p2)flush();buffer[++p1]=ch;return;}
+    template&lt;class T&gt;I void write(T x){
+        static char buf[20];static int len =-1;
+        if(x&gt;=0){do buf[++len]=(x%10)^48,x/=10;while(x);}
+        else{pc('-');do buf[++len]=(-(x%10))^48,x/=10;while(x);}
+        while(len&gt;=0)pc(buf[len--]);
+        return;}
+}
+using namespace IO;
+
+const int maxn = 50000+50;
+const int maxm = 200000+200;
+#define Ci const int &amp;
+
+int n,m,s,t;
+
+struct edge{
+    int u,v,n,flow;
+    I edge(Ci _u=0,Ci _v=0,Ci _n=0,Ci _flow=0):u(_u),v(_v),n(_n),flow(_flow){}
+}e[maxm];
+int cnt=1,head[maxn],cur[maxn];
+I void add(Ci u,Ci v,Ci flow){
+    e[++cnt]=edge(u,v,head[u],flow),head[u]=cnt;
+    e[++cnt]=edge(v,u,head[v],0),head[v]=cnt;
+}
+
+int dep[maxn],pre[maxn];
+#include&lt;queue&gt;
+I bool bfs(){
+    queue&lt;int&gt;q;
+    memset(dep,0,sizeof dep);
+    memcpy(cur,head,sizeof(head));
+    dep[s]=1,q.push(s);
+    while(!q.empty()){
+        int u=q.front();q.pop();
+        for(int ee=head[u],v;v=e[ee].v,ee;ee=e[ee].n)
+            if(e[ee].flow&amp;&amp;dep[v]==0)
+                dep[v]=dep[u]+1,q.push(v);
+    }
+    return dep[t];
+}
+int dfs(int u,int limit){
+    if(limit==0||u==t)return limit;
+    int flow=0,f;
+    for(int ee=cur[u],v;cur[u]=ee,v=e[ee].v,ee;ee=e[ee].n)
+        if(dep[v]==dep[u]+1&amp;&amp;(f=dfs(v,min(limit,e[ee].flow)))){
+            flow+=f;
+            limit-=f;
+            e[ee].flow-=f;
+            e[ee^1].flow+=f;
+            pre[u&gt;&gt;1]=v&gt;&gt;1;
+            if(!limit)break;
+        }
+    return flow;
+}
+I int dinic(){
+    int ans=0;
+    while(bfs())
+            ans+=dfs(s,inf);
+        return ans;
+}
+I bool check(int x){
+    int xx=sqrt(x);
+    return xx==x;
+}
+int top,now,sta[maxn],vis[maxn];
+signed main(){
+    read(n);
+    s=maxn-10,t=maxn-9;
+    while(top&lt;=n){
+        ++now;
+        add(s,now&lt;&lt;1,1);
+        add((now&lt;&lt;1)|1,t,1);
+        for(int i=sqrt(now)+1;i*i&lt;(now&lt;&lt;1);++i)
+            add((i*i-now)&lt;&lt;1,(now &lt;&lt; 1)|1,1);
+        int flow=dinic();
+        if(!flow)
+            sta[++top]=now;
+    }
+    write(now-1),pc('\n');
+    FOR(i,1,n)
+        if(!vis[sta[i]]){ 
+            for(int u=sta[i];u&amp;&amp;u!=(t&gt;&gt;1);u=pre[u])
+                vis[u]=1,write(u),pc(' ');
+            pc('\n');
+        }
+    flush();
+    return 0;
+}
+</code></pre>
+<h3 id="zkw费用流费用流板子">zkw费用流（费用流板子）：</h3>
+<pre><code>#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;cctype&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+using namespace std;
+#define I inline
+#define R register
+#define inf 1073742823
+#define FOR(i,begin,end) for(R int i=begin;i&lt;=end;++i)
+#define ROF(i,begin,end) for(R int i=begin;i&gt;=end;--i)
+
+namespace IO{
+    char buf[1&lt;&lt;21],*pa=buf,*pb=buf;
+    char buffer[1&lt;&lt;21];int p1=-1;const int p2=(1&lt;&lt;21)-1; 
+    I char gc(){return pa==pb&amp;&amp;(pb=(pa=buf)+fread(buf,1,1&lt;&lt;21,stdin),pa==pb)?EOF:*pa++;}
+    template&lt;class T&gt;I void read(T &amp;x){
+        x=0;R int y=0;R char ch=gc();
+        for(;!isdigit(ch);ch=gc())y=ch=='-';
+        for(;isdigit(ch);ch=gc())x=x*10+(ch^48);
+        (y)&amp;&amp;(x=-x);return;}
+    I void flush(){fwrite(buffer,1,p1+1,stdout);p1=-1;return;}
+    I void pc(int ch){if(p1==p2)flush();buffer[++p1]=ch;return;}
+    template&lt;class T&gt;I void write(T x){
+        static char buf[20];static int len =-1;
+        if(x&gt;=0){do buf[++len]=(x%10)^48,x/=10;while(x);}
+        else{pc('-');do buf[++len]=(-(x%10))^48,x/=10;while(x);}
+        while(len&gt;=0)pc(buf[len--]);
+        return;}
+}
+using namespace IO;
+
+const int maxn = 50000+50;
+const int maxm = 200000+200;
+#define ci const int &amp;
+
+struct edge{
+    int u,v,f,w,n;
+    I edge(ci _u=0,ci _v=0,ci _f=0,ci _w=0,ci _n=0):u(_u),v(_v),f(_f),w(_w),n(_n){}
+}e[maxm];
+int head[maxn],cnt=1;
+int dis[maxn],vis[maxn];
+I void add(ci u,ci v,ci f,ci w){
+    e[++cnt]=edge(u,v,f,w,head[u]),head[u]=cnt;
+    e[++cnt]=edge(v,u,0,-w,head[v]),head[v]=cnt;
+}
+int n,m,s,t,flow=0,cost=0;
+
+I bool spfa(int s,int t){
+    memset(vis,0,sizeof vis);
+    fill(dis,dis+1+n,inf);
+    vis[t]=1;dis[t]=0;
+    queue&lt;int&gt;q;q.push(t);
+    while(!q.empty()){
+        int u=q.front();q.pop();
+        for(int ee=head[u],v;v=e[ee].v,ee;ee=e[ee].n)
+            if(e[ee^1].f&gt;0&amp;&amp;dis[v]&gt;dis[u]-e[ee].w){
+                dis[v]=dis[u]-e[ee].w;
+                if(vis[v]==0)vis[v]=1,q.push(v);
+            }
+        vis[u]=0;
+    }
+    if(dis[s]==inf)return 0;
+    else return 1;
+}
+
+int dfs(int u,int low){
+    if(u==t)return vis[t]=1,low;
+    int used=0,aa;vis[u]=1;
+    for(int ee=head[u],v;v=e[ee].v,ee;ee=e[ee].n)
+        if(vis[v]==0&amp;&amp;e[ee].f&gt;0&amp;&amp;dis[u]-e[ee].w==dis[v]){
+            if((aa=dfs(v,min(e[ee].f,low-used)))&gt;0)
+                cost+=aa*e[ee].w,e[ee].f-=aa,e[ee^1].f+=aa,used+=aa;
+            if(used==low)break;
+        }
+    return used;
+}
+
+signed main(){
+    read(n),read(m),read(s),read(t);
+    int u,v,f,w;
+    FOR(i,1,m)
+        read(u),read(v),read(f),read(w),
+        add(u,v,f,w);
+    while(spfa(s,t)){
+        vis[t]=1;
+        while(vis[t]){
+            memset(vis,0,sizeof vis);
+            flow+=dfs(s,inf);
+        }
+    }
+    write(flow),pc(' '),write(cost);
+    flush();
+    return 0;
+}
+</code></pre>
+<p><s>个人喜欢用dinic跑非一次性建边的网络流，用isap跑一次性建边的网络流，用zkw跑费用流，至于HLPP我还不会</s><br>
+当然网络流还是要靠建图。</p>
+<hr>
+<h2 id="网络流24题"><a href="https://www.luogu.com.cn/problem/list?tag=332">网络流24题</a>：</h2>
+<h3 id="p2756-飞行员配对方案问题"><a href="https://www.luogu.com.cn/problem/P2756">P2756 飞行员配对方案问题</a></h3>
+<p>显然的一个二分图匹配问题，还要输出方案；</p>
+<p>我们考虑建图，首先一个飞行员只能匹配一个飞行员，所以我们从S向一类飞行员连边，从另一类飞行员向T连边，边权为1，然后对于能匹配的飞行员我们连接1或者inf的边（本体都可），完成建图。</p>
+<p>关于输出方案：考虑残量网络上的反向边发生流量改变即可。</p>
+<pre><code>#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;cctype&gt;
+#include &lt;cmath&gt;
+using namespace std;
+#define I inline
+#define R register
+#define inf 1073742823
+#define FOR(i,begin,end) for(R int i=begin;i&lt;=end;++i)
+#define ROF(i,begin,end) for(R int i=begin;i&gt;=end;--i)
+#include&lt;queue&gt;
+namespace IO{
+    char buf[1&lt;&lt;21],*pa=buf,*pb=buf;
+    char buffer[1&lt;&lt;21];int p1=-1;const int p2=(1&lt;&lt;21)-1; 
+    I char gc(){return pa==pb&amp;&amp;(pb=(pa=buf)+fread(buf,1,1&lt;&lt;21,stdin),pa==pb)?EOF:*pa++;}
+    template&lt;class T&gt;I void read(T &amp;x){
+        x=0;R int y=0;R char ch=gc();
+        for(;!isdigit(ch);ch=gc())y=ch=='-';
+        for(;isdigit(ch);ch=gc())x=x*10+(ch^48);
+        (y)&amp;&amp;(x=-x);return;}
+    I void flush(){fwrite(buffer,1,p1+1,stdout);p1=-1;return;}
+    I void pc(int ch){if(p1==p2)flush();buffer[++p1]=ch;return;}
+    template&lt;class T&gt;I void write(T x){
+        static char buf[20];static int len =-1;
+        if(x&gt;=0){do buf[++len]=(x%10)^48,x/=10;while(x);}
+        else{pc('-');do buf[++len]=(-(x%10))^48,x/=10;while(x);}
+        while(len&gt;=0)pc(buf[len--]);
+        return;}
+}
+using namespace IO;
+int tot,s,t;
+const int maxn = 50000+50;
+const int maxm = 200000+200;
+#define ci const int &amp;
+struct edge{
+    int u,v,f,n;
+    I edge(ci uu =0,ci vv=0,ci ff=0,ci nn=0):u(uu),v(vv),f(ff),n(nn){}
+}e[maxm];
+int cnt=1,head[maxn],cur[maxn],gap[maxn],dis[maxn],mxflow=0;
+I void add(ci u,ci v,ci f){
+    e[++cnt]=edge(u,v,f,head[u]),head[u]=cnt;
+    e[++cnt]=edge(v,u,0,head[v]),head[v]=cnt;
+}
+I void bfs(){
+    queue&lt;int&gt;q;q.push(t),gap[dis[t]=1]++;
+    while(!q.empty()){
+        int u=q.front();q.pop();
+        for(int ee=head[u],v;v=e[ee].v,ee;ee=e[ee].n)
+        if(!dis[v])gap[dis[v]=dis[u]+1]++,q.push(v);
+    }
+}
+int dfs(ci u,ci flow){
+    if(u==t&amp;&amp;((mxflow+=flow)||1))return flow;
+    int us=0,f;
+    for(int ee=cur[u],v;cur[u]=ee,v=e[ee].v,ee;ee=e[ee].n)
+        if(dis[v]==dis[u]-1){
+            if(f=dfs(v,min(flow-us,e[ee].f)))
+                e[ee].f-=f,e[ee^1].f+=f,us+=f;
+            if(us==flow)return flow;
+        }
+    (--gap[dis[u]])?(++gap[++dis[u]]):dis[s]=tot+1;
+    return us;
+}
+I int isap(){
+    bfs();
+    while(dis[s]&lt;=tot+1)
+        memcpy(cur,head,sizeof head),
+        dfs(s,inf);
+    return mxflow;
+}
+int n,m;
+int fa[maxn];
+I int getf(int x){return x==fa[x]?x:fa[x]=getf(fa[x]);}
+I void output(int x){
+    write(x),pc(' ');
+    for(int ee=head[x],v;v=e[ee].v,ee;ee=e[ee].n)
+        if(ee&gt;=4*n+2)
+            if(e[ee^1].f!=0&amp;&amp;v&gt;n)
+                output(v-n);
+    return;
+}
+signed main(){
+    int x,y;
+    read(n),read(m);
+    s=0,t=2*n+1,tot=2*n+2;
+    FOR(i,1,n)
+        add(s,i,1),
+        add(i+n,t,1);
+    // cnt = 4n+1; 
+    FOR(i,1,m)
+        read(x),read(y),
+        add(x,y+n,1);
+    // cnt = 4n + 2m + 1;
+    int ans = n - isap();
+    FOR(i,1,n)fa[i]=i;
+    for(int ee=4*n+2;ee&lt;=cnt;ee+=2)
+        if(e[ee^1].f!=0)
+            fa[getf(e[ee].v-n)]=getf(e[ee].u);
+    FOR(i,1,n)
+        if(getf(i)==i)
+            output(i),pc('\n');
+    write(ans);
+    flush();
+    return 0;
+}
+
+</code></pre>
+<h3 id="p3254-圆桌问题"><a href="https://www.luogu.com.cn/problem/P3254">P3254 圆桌问题</a></h3>
+<p>仍然是一个类似二分图的问题，也要输出方案。</p>
+<p>我们考虑从S向每个单位连接流量为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>s</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">s_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>的边，表示这个单位的人数，从每个餐桌向T连接流量为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>c</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">c_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>的边，表示餐桌可以容纳的人数，对于所有的单位向所有的餐桌连一条流量为1的边，表示同一个单位来的代表不在同一个餐桌就餐,建图完成。输出方案与上题同理。</p>
+<pre><code>#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;cctype&gt;
+#include &lt;cmath&gt;
+#include &lt;vector&gt;
+using namespace std;
+#define I inline
+#define R register
+#define inf 1073742823
+#define FOR(i,begin,end) for(R int i=begin;i&lt;=end;++i)
+#define ROF(i,begin,end) for(R int i=begin;i&gt;=end;--i)
+#include&lt;queue&gt;
+namespace IO{
+    char buf[1&lt;&lt;21],*pa=buf,*pb=buf;
+    char buffer[1&lt;&lt;21];int p1=-1;const int p2=(1&lt;&lt;21)-1; 
+    I char gc(){return pa==pb&amp;&amp;(pb=(pa=buf)+fread(buf,1,1&lt;&lt;21,stdin),pa==pb)?EOF:*pa++;}
+    template&lt;class T&gt;I void read(T &amp;x){
+        x=0;R int y=0;R char ch=gc();
+        for(;!isdigit(ch);ch=gc())y=ch=='-';
+        for(;isdigit(ch);ch=gc())x=x*10+(ch^48);
+        (y)&amp;&amp;(x=-x);return;}
+    I void flush(){fwrite(buffer,1,p1+1,stdout);p1=-1;return;}
+    I void pc(int ch){if(p1==p2)flush();buffer[++p1]=ch;return;}
+    template&lt;class T&gt;I void write(T x){
+        static char buf[20];static int len =-1;
+        if(x&gt;=0){do buf[++len]=(x%10)^48,x/=10;while(x);}
+        else{pc('-');do buf[++len]=(-(x%10))^48,x/=10;while(x);}
+        while(len&gt;=0)pc(buf[len--]);
+        return;}
+}
+using namespace IO;
+int s,t,tot;
+const int maxn = 50000+50;
+const int maxm = 200000+200;
+#define ci const int &amp;
+struct edge{
+    int u,v,f,n;
+    I edge(ci uu =0,ci vv=0,ci ff=0,ci nn=0):u(uu),v(vv),f(ff),n(nn){}
+}e[maxm];
+int cnt=1,head[maxn],cur[maxn],gap[maxn],dis[maxn],mxflow=0;
+I void add(ci u,ci v,ci f){
+    e[++cnt]=edge(u,v,f,head[u]),head[u]=cnt;
+    e[++cnt]=edge(v,u,0,head[v]),head[v]=cnt;
+}
+I void bfs(){
+    queue&lt;int&gt;q;q.push(t),gap[dis[t]=1]++;
+    while(!q.empty()){
+        int u=q.front();q.pop();
+        for(int ee=head[u],v;v=e[ee].v,ee;ee=e[ee].n)
+        if(!dis[v])gap[dis[v]=dis[u]+1]++,q.push(v);
+    }
+}
+int dfs(ci u,ci flow){
+    if(u==t&amp;&amp;((mxflow+=flow)||1))return flow;
+    int us=0,f;
+    for(int ee=cur[u],v;cur[u]=ee,v=e[ee].v,ee;ee=e[ee].n)
+        if(dis[v]==dis[u]-1){
+            if(f=dfs(v,min(flow-us,e[ee].f)))
+                e[ee].f-=f,e[ee^1].f+=f,us+=f;
+            if(us==flow)return flow;
+        }
+    (--gap[dis[u]])?(++gap[++dis[u]]):dis[s]=tot+1;
+    return us;
+}
+int n,m,x,sum;
+int rr[maxn],cc[maxn];
+vector&lt;int&gt;ans[maxn];
+signed main(){
+    read(n),read(m);
+    s=0,t=n+m+1;
+    tot=t;
+    FOR(i,1,n)
+        read(rr[i]),sum+=rr[i],
+        add(s,i,rr[i]);
+    FOR(i,1,m)
+        read(cc[i]),
+        add(i+n,t,cc[i]);
+    FOR(i,1,n)
+        FOR(j,1,m)
+            add(i,j+n,1);
+    while(dis[s]&lt;=tot+1)memcpy(cur,head,sizeof(head)),dfs(s,inf);
+    if(mxflow!=sum){
+        puts(&quot;0&quot;);
+        return 0;
+    }
+    write(1),pc('\n');
+    for(int ee=2*(n+m+1);ee&lt;=cnt;ee+=2)
+        if(e[ee^1].f!=0)
+            ans[e[ee].u].push_back(e[ee].v);
+    FOR(i,1,n){
+        for(auto k:ans[i])
+            write(k-n),pc(' ');
+        pc('\n');
+    }
+    flush();
+    return 0;
+}
+</code></pre>
+<h3 id="p2764-最小路径覆盖问题"><a href="https://www.luogu.com.cn/problem/P2764">P2764 最小路径覆盖问题</a></h3>
+<p>题目渐渐有了难度，<s>模板题洛谷也给了提示</s></p>
+<p>我们考虑拆点，把一个点拆成两个点，第一个拆点表示出边，第二个拆点表示入边，我们把S向第一个拆点连一条流量为1的边，表示这个点的出度最大为1，把第二个拆点向T连接一条流量为1的边,表示这个点的最大入度为1，然后我们连接原图中的边，流量为1，表示存在路径，建图完成。</p>
+<p>我们对原图跑一个最大流，显然就是匹配数，所以n-匹配数即为答案，关于路径输出和路径起点，与第一题同理。</p>
+<pre><code>#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;cctype&gt;
+#include &lt;cmath&gt;
+using namespace std;
+#define I inline
+#define R register
+#define inf 1073742823
+#define FOR(i,begin,end) for(R int i=begin;i&lt;=end;++i)
+#define ROF(i,begin,end) for(R int i=begin;i&gt;=end;--i)
+#include&lt;queue&gt;
+namespace IO{
+    char buf[1&lt;&lt;21],*pa=buf,*pb=buf;
+    char buffer[1&lt;&lt;21];int p1=-1;const int p2=(1&lt;&lt;21)-1; 
+    I char gc(){return pa==pb&amp;&amp;(pb=(pa=buf)+fread(buf,1,1&lt;&lt;21,stdin),pa==pb)?EOF:*pa++;}
+    template&lt;class T&gt;I void read(T &amp;x){
+        x=0;R int y=0;R char ch=gc();
+        for(;!isdigit(ch);ch=gc())y=ch=='-';
+        for(;isdigit(ch);ch=gc())x=x*10+(ch^48);
+        (y)&amp;&amp;(x=-x);return;}
+    I void flush(){fwrite(buffer,1,p1+1,stdout);p1=-1;return;}
+    I void pc(int ch){if(p1==p2)flush();buffer[++p1]=ch;return;}
+    template&lt;class T&gt;I void write(T x){
+        static char buf[20];static int len =-1;
+        if(x&gt;=0){do buf[++len]=(x%10)^48,x/=10;while(x);}
+        else{pc('-');do buf[++len]=(-(x%10))^48,x/=10;while(x);}
+        while(len&gt;=0)pc(buf[len--]);
+        return;}
+}
+using namespace IO;
+int tot,s,t;
+const int maxn = 50000+50;
+const int maxm = 200000+200;
+#define ci const int &amp;
+struct edge{
+    int u,v,f,n;
+    I edge(ci uu =0,ci vv=0,ci ff=0,ci nn=0):u(uu),v(vv),f(ff),n(nn){}
+}e[maxm];
+int cnt=1,head[maxn],cur[maxn],gap[maxn],dis[maxn],mxflow=0;
+I void add(ci u,ci v,ci f){
+    e[++cnt]=edge(u,v,f,head[u]),head[u]=cnt;
+    e[++cnt]=edge(v,u,0,head[v]),head[v]=cnt;
+}
+I void bfs(){
+    queue&lt;int&gt;q;q.push(t),gap[dis[t]=1]++;
+    while(!q.empty()){
+        int u=q.front();q.pop();
+        for(int ee=head[u],v;v=e[ee].v,ee;ee=e[ee].n)
+        if(!dis[v])gap[dis[v]=dis[u]+1]++,q.push(v);
+    }
+}
+int dfs(ci u,ci flow){
+    if(u==t&amp;&amp;((mxflow+=flow)||1))return flow;
+    int us=0,f;
+    for(int ee=cur[u],v;cur[u]=ee,v=e[ee].v,ee;ee=e[ee].n)
+        if(dis[v]==dis[u]-1){
+            if(f=dfs(v,min(flow-us,e[ee].f)))
+                e[ee].f-=f,e[ee^1].f+=f,us+=f;
+            if(us==flow)return flow;
+        }
+    (--gap[dis[u]])?(++gap[++dis[u]]):dis[s]=tot+1;
+    return us;
+}
+I int isap(){
+    bfs();
+    while(dis[s]&lt;=tot+1)
+        memcpy(cur,head,sizeof head),
+        dfs(s,inf);
+    return mxflow;
+}
+int n,m;
+int fa[maxn];
+I int getf(int x){return x==fa[x]?x:fa[x]=getf(fa[x]);}
+I void output(int x){
+    write(x),pc(' ');
+    for(int ee=head[x],v;v=e[ee].v,ee;ee=e[ee].n)
+        if(ee&gt;=4*n+2)
+            if(e[ee^1].f!=0&amp;&amp;v&gt;n)
+                output(v-n);
+    return;
+}
+signed main(){
+    int x,y;
+    read(n),read(m);
+    s=0,t=2*n+1,tot=2*n+2;
+    FOR(i,1,n)
+        add(s,i,1),
+        add(i+n,t,1);
+    // cnt = 4n+1; 
+    FOR(i,1,m)
+        read(x),read(y),
+        add(x,y+n,1);
+    // cnt = 4n + 2m + 1;
+    int ans = n - isap();
+    FOR(i,1,n)fa[i]=i;
+    for(int ee=4*n+2;ee&lt;=cnt;ee+=2)
+        if(e[ee^1].f!=0)
+            fa[getf(e[ee].v-n)]=getf(e[ee].u);
+    FOR(i,1,n)
+        if(getf(i)==i)
+            output(i),pc('\n');
+    write(ans);
+    flush();
+    return 0;
+}
+
+</code></pre>
+<h3 id="p2765-魔术球问题"><a href="https://www.luogu.com.cn/problem/P2765">P2765 魔术球问题</a></h3>
+<p>显然这是一个需要不断加边的网络流，我们将一个数向与他组成完全平方数的数的拆点连边，S向原数连边，拆点向T连边，跑网络流即可，与上一题思想相似。</p>
+<pre><code>#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;cctype&gt;
+#include &lt;cmath&gt;
+using namespace std;
+#define I inline
+#define R register
+#define inf 1073742823
+#define FOR(i,begin,end) for(R int i=begin;i&lt;=end;++i)
+#define ROF(i,begin,end) for(R int i=begin;i&gt;=end;--i)
+
+namespace IO{
+    char buf[1&lt;&lt;21],*pa=buf,*pb=buf;
+    char buffer[1&lt;&lt;21];int p1=-1;const int p2=(1&lt;&lt;21)-1; 
+    I char gc(){return pa==pb&amp;&amp;(pb=(pa=buf)+fread(buf,1,1&lt;&lt;21,stdin),pa==pb)?EOF:*pa++;}
+    template&lt;class T&gt;I void read(T &amp;x){
+        x=0;R int y=0;R char ch=gc();
+        for(;!isdigit(ch);ch=gc())y=ch=='-';
+        for(;isdigit(ch);ch=gc())x=x*10+(ch^48);
+        (y)&amp;&amp;(x=-x);return;}
+    I void flush(){fwrite(buffer,1,p1+1,stdout);p1=-1;return;}
+    I void pc(int ch){if(p1==p2)flush();buffer[++p1]=ch;return;}
+    template&lt;class T&gt;I void write(T x){
+        static char buf[20];static int len =-1;
+        if(x&gt;=0){do buf[++len]=(x%10)^48,x/=10;while(x);}
+        else{pc('-');do buf[++len]=(-(x%10))^48,x/=10;while(x);}
+        while(len&gt;=0)pc(buf[len--]);
+        return;}
+}
+using namespace IO;
+
+const int maxn = 50000+50;
+const int maxm = 200000+200;
+#define Ci const int &amp;
+
+int n,m,s,t;
+
+struct edge{
+    int u,v,n,flow;
+    I edge(Ci _u=0,Ci _v=0,Ci _n=0,Ci _flow=0):u(_u),v(_v),n(_n),flow(_flow){}
+}e[maxm];
+int cnt=1,head[maxn],cur[maxn];
+I void add(Ci u,Ci v,Ci flow){
+    e[++cnt]=edge(u,v,head[u],flow),head[u]=cnt;
+    e[++cnt]=edge(v,u,head[v],0),head[v]=cnt;
+}
+
+int dep[maxn],pre[maxn];
+#include&lt;queue&gt;
+I bool bfs(){
+    queue&lt;int&gt;q;
+    memset(dep,0,sizeof dep);
+    memcpy(cur,head,sizeof(head));
+    dep[s]=1,q.push(s);
+    while(!q.empty()){
+        int u=q.front();q.pop();
+        for(int ee=head[u],v;v=e[ee].v,ee;ee=e[ee].n)
+            if(e[ee].flow&amp;&amp;dep[v]==0)
+                dep[v]=dep[u]+1,q.push(v);
+    }
+    return dep[t];
+}
+int dfs(int u,int limit){
+    if(limit==0||u==t)return limit;
+    int flow=0,f;
+    for(int ee=cur[u],v;cur[u]=ee,v=e[ee].v,ee;ee=e[ee].n)
+        if(dep[v]==dep[u]+1&amp;&amp;(f=dfs(v,min(limit,e[ee].flow)))){
+            flow+=f;
+            limit-=f;
+            e[ee].flow-=f;
+            e[ee^1].flow+=f;
+            pre[u&gt;&gt;1]=v&gt;&gt;1;
+            if(!limit)break;
+        }
+    return flow;
+}
+I int dinic(){
+    int ans=0;
+    while(bfs())
+            ans+=dfs(s,inf);
+        return ans;
+}
+I bool check(int x){
+    int xx=sqrt(x);
+    return xx==x;
+}
+int top,now,sta[maxn],vis[maxn];
+signed main(){
+    read(n);
+    s=maxn-10,t=maxn-9;
+    while(top&lt;=n){
+        ++now;
+        add(s,now&lt;&lt;1,1);
+        add((now&lt;&lt;1)|1,t,1);
+        for(int i=sqrt(now)+1;i*i&lt;(now&lt;&lt;1);++i)
+            add((i*i-now)&lt;&lt;1,(now &lt;&lt; 1)|1,1);
+        int flow=dinic();
+        if(!flow)
+            sta[++top]=now;
+    }
+    write(now-1),pc('\n');
+    FOR(i,1,n)
+        if(!vis[sta[i]]){ 
+            for(int u=sta[i];u&amp;&amp;u!=(t&gt;&gt;1);u=pre[u])
+                vis[u]=1,write(u),pc(' ');
+            pc('\n');
+        }
+    flush();
+    return 0;
+}
+
+</code></pre>
+
+                </div>
+            </article>
+        </main>
+    </div>
+    <div class="doc-footer-nav mdui-color-theme">
+        <div class="mdui-container">
+            <div class="mdui-row">
+                
+                <div class="mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left"></div>
+                
+                
+                <a href="https://luxin-oi.github.io/post/uoj-ti-dan/" class="mdui-ripple mdui-color-theme mdui-col-xs-10 mdui-col-sm-6 doc-footer-nav-right">
+                    <div class="doc-footer-nav-text">
+                        <i class="mdui-icon material-icons">arrow_forward</i>
+                        <span class="doc-footer-nav-direction">下一篇文章</span>
+                        <div class="doc-footer-nav-chapter">UOJ题单</div>
+                    </div>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+    <br>
+    
+        
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+    var gitalk = new Gitalk({
+        clientID: '3dd0e4026cfbe60780d9',
+        clientSecret: '28d1aba10ffa097bbfb31253fb3676866783cc2f',
+        repo: 'luxin-oi.github.io',
+        owner: 'luxin-oi',
+        admin: ['luxin-oi'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+
+    gitalk.render('gitalk-container')
+
+</script>
+
+        
+
+        
+    
+    <div class="comment"></div>
+</div>
+<footer class="mdui-container footer ">
+    <div class="head_card-offset"></div>
+    <div class="mdui-row mdui-row-gapless">
+        <div class="k-container">
+            <img width="100%" src="/media/img/skirt.png">
+        </div>
+    </div>
+
+    <div class="site-info">
+        
+    </div>
+</footer>
+<div id="landlord" style="left:5px;bottom:0px;">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="500" height="560" class="live2d"></canvas>
+    <div class="live_talk_input_body">
+        <div class="live_talk_input_name_body">
+            <input name="name" type="text" class="live_talk_name white_input" id="AIuserName" autocomplete="off" placeholder="你的名字" />
+        </div>
+        <div class="live_talk_input_text_body">
+            <input name="talk" type="text" class="live_talk_talk white_input" id="AIuserText" autocomplete="off" placeholder="要和我聊什么呀？"/>
+            <button type="button" class="live_talk_send_btn" id="talk_send">发送</button>
+        </div>
+    </div>
+    <input name="live_talk" id="live_talk" value="1" type="hidden" />
+    <div class="live_ico_box">
+        <div class="live_ico_item type_info" id="showInfoBtn"></div>
+        <div class="live_ico_item type_talk" id="showTalkBtn"></div>
+        <div class="live_ico_item type_music" id="musicButton"></div>
+        <div class="live_ico_item type_youdu" id="youduButton"></div>
+        <div class="live_ico_item type_quit" id="hideButton"></div>
+        <input name="live_statu_val" id="live_statu_val" value="0" type="hidden" />
+        <audio src="" style="display:none;" id="live2d_bgm" data-bgm="0" preload="none"></audio>
+        <input name="live2dBGM" value="https://img.apa70.com/123.mp3" type="hidden">
+        <input name="live2dBGM" value="https://img.apa70.com/123.mp3" type="hidden">
+        <input id="duType" value="douqilai,l2d_caihong" type="hidden">
+    </div>
+</div>
+<div id="open_live2d">召唤伊斯特瓦尔</div>
+<script>
+    var message_Path = '/media/live2d/';//资源目录，如果目录不对请更改
+    var talkAPI = "";//如果有类似图灵机器人的聊天接口请填写接口路径
+</script>
+<!--<script src="/media/js/jquery-3.3.1.min.js"></script>-->
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="/media/live2d/js/live2d.js"></script>
+<script type="text/javascript" src="/media/live2d/js/message.js"></script>
+
+</body>
+<script src="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    $('.comment').bind('DOMNodeInserted',()=>{
+        $('.comment').unbind()
+
+        $('.vbtn').addClass(' mdui-btn mdui-color-theme-accent mdui-ripple')
+    })
+
+    let valine = new Valine({
+        el: '.comment',
+        
+        
+        
+        path: window.location.pathname,
+        pageSize: 30,
+        avatar:'mm',
+        notify:true
+    })
+</script>
+</html>
