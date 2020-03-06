@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://luxin-oi.github.io/</id>
     <title>luxin</title>
-    <updated>2020-03-05T20:19:37.384Z</updated>
+    <updated>2020-03-06T10:23:08.924Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://luxin-oi.github.io/"/>
     <link rel="self" href="https://luxin-oi.github.io/atom.xml"/>
@@ -126,7 +126,7 @@ using namespace std;
 #define inf 1073742823
 #define FOR(i,begin,end) for(R int i=begin;i&lt;=end;++i)
 #define ROF(i,begin,end) for(R int i=begin;i&gt;=end;--i)
-
+#include&lt;queue&gt;
 namespace IO{
     char buf[1&lt;&lt;21],*pa=buf,*pb=buf;
     char buffer[1&lt;&lt;21];int p1=-1;const int p2=(1&lt;&lt;21)-1; 
@@ -146,83 +146,56 @@ namespace IO{
         return;}
 }
 using namespace IO;
-
+int tot,s,t;
 const int maxn = 50000+50;
 const int maxm = 200000+200;
-#define Ci const int &amp;
-
-int n,m,s,t;
-
+#define ci const int &amp;
 struct edge{
-    int u,v,n,flow;
-    I edge(Ci _u=0,Ci _v=0,Ci _n=0,Ci _flow=0):u(_u),v(_v),n(_n),flow(_flow){}
+    int u,v,f,n;
+    I edge(ci uu =0,ci vv=0,ci ff=0,ci nn=0):u(uu),v(vv),f(ff),n(nn){}
 }e[maxm];
-int cnt=1,head[maxn],cur[maxn];
-I void add(Ci u,Ci v,Ci flow){
-    e[++cnt]=edge(u,v,head[u],flow),head[u]=cnt;
-    e[++cnt]=edge(v,u,head[v],0),head[v]=cnt;
+int cnt=1,head[maxn],cur[maxn],gap[maxn],dis[maxn];
+I void add(ci u,ci v,ci f){
+    e[++cnt]=edge(u,v,f,head[u]),head[u]=cnt;
+    e[++cnt]=edge(v,u,0,head[v]),head[v]=cnt;
 }
-
-int dep[maxn],pre[maxn];
-#include&lt;queue&gt;
-I bool bfs(){
-    queue&lt;int&gt;q;
-    memset(dep,0,sizeof dep);
-    memcpy(cur,head,sizeof(head));
-    dep[s]=1,q.push(s);
+I void bfs(){
+    // memset(dep,0,sizeof dis)
+    // memset(gap,0,sizeof gap)
+    queue&lt;int&gt;q;q.push(t),gap[dis[t]=1]++;
     while(!q.empty()){
         int u=q.front();q.pop();
         for(int ee=head[u],v;v=e[ee].v,ee;ee=e[ee].n)
-            if(e[ee].flow&amp;&amp;dep[v]==0)
-                dep[v]=dep[u]+1,q.push(v);
+        if(!dis[v])gap[dis[v]=dis[u]+1]++,q.push(v);
     }
-    return dep[t];
 }
-int dfs(int u,int limit){
-    if(limit==0||u==t)return limit;
-    int flow=0,f;
+int dfs(ci u,ci flow){
+    if(u==t)return flow;
+    int us=0,f;
     for(int ee=cur[u],v;cur[u]=ee,v=e[ee].v,ee;ee=e[ee].n)
-        if(dep[v]==dep[u]+1&amp;&amp;(f=dfs(v,min(limit,e[ee].flow)))){
-            flow+=f;
-            limit-=f;
-            e[ee].flow-=f;
-            e[ee^1].flow+=f;
-            pre[u&gt;&gt;1]=v&gt;&gt;1;
-            if(!limit)break;
+        if(dis[v]==dis[u]-1){
+            if(f=dfs(v,min(flow-us,e[ee].f)))
+                e[ee].f-=f,e[ee^1].f+=f,us+=f;
+            if(us==flow)return flow;
         }
-    return flow;
+    (--gap[dis[u]])?(++gap[++dis[u]]):dis[s]=tot+1;
+    return us;
 }
-I int dinic(){
+I int isap(){
     int ans=0;
-    while(bfs())
-            ans+=dfs(s,inf);
-        return ans;
+    bfs();
+    while(dis[s]&lt;=tot+1)
+        memcpy(cur,head,sizeof head),
+        ans+=dfs(s,inf);
+    return ans;
 }
-I bool check(int x){
-    int xx=sqrt(x);
-    return xx==x;
-}
-int top,now,sta[maxn],vis[maxn];
+int n,m;
 signed main(){
-    read(n);
-    s=maxn-10,t=maxn-9;
-    while(top&lt;=n){
-        ++now;
-        add(s,now&lt;&lt;1,1);
-        add((now&lt;&lt;1)|1,t,1);
-        for(int i=sqrt(now)+1;i*i&lt;(now&lt;&lt;1);++i)
-            add((i*i-now)&lt;&lt;1,(now &lt;&lt; 1)|1,1);
-        int flow=dinic();
-        if(!flow)
-            sta[++top]=now;
-    }
-    write(now-1),pc('\n');
-    FOR(i,1,n)
-        if(!vis[sta[i]]){ 
-            for(int u=sta[i];u&amp;&amp;u!=(t&gt;&gt;1);u=pre[u])
-                vis[u]=1,write(u),pc(' ');
-            pc('\n');
-        }
+    int u,v,f;
+    read(n),read(m),read(s),read(t);
+    tot=n;
+    FOR(i,1,m)read(u),read(v),read(f),add(u,v,f);
+    write(isap());
     flush();
     return 0;
 }
@@ -773,7 +746,113 @@ signed main(){
     flush();
     return 0;
 }
-
+</code></pre>
+<h3 id="p2766-最长不下降子序列问题"><a href="https://www.luogu.com.cn/problem/P2766">P2766 最长不下降子序列问题</a></h3>
+<p>第一问我们考虑直接DP；<br>
+第二问我们向原点和拆点连一条为1的边表示只能被选一次，然后对于DP值等于1的从源点S向其连边，流量为1，对于DP等于长度的，从其向汇点T连边，流量为1，表示路径可行性。<br>
+第三问在残量网络上加源点到1的边，假如最后一个数在最长上升子序列上，连接一条向汇点的边，还有原点向拆点连边，流量为inf，表示可以无限使用。</p>
+<pre><code>#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;cctype&gt;
+#include &lt;cmath&gt;
+using namespace std;
+#define I inline
+#define R register
+#define inf 1073742823
+#define FOR(i,begin,end) for(R int i=begin;i&lt;=end;++i)
+#define ROF(i,begin,end) for(R int i=begin;i&gt;=end;--i)
+#include&lt;queue&gt;
+namespace IO{
+    char buf[1&lt;&lt;21],*pa=buf,*pb=buf;
+    char buffer[1&lt;&lt;21];int p1=-1;const int p2=(1&lt;&lt;21)-1; 
+    I char gc(){return pa==pb&amp;&amp;(pb=(pa=buf)+fread(buf,1,1&lt;&lt;21,stdin),pa==pb)?EOF:*pa++;}
+    template&lt;class T&gt;I void read(T &amp;x){
+        x=0;R int y=0;R char ch=gc();
+        for(;!isdigit(ch);ch=gc())y=ch=='-';
+        for(;isdigit(ch);ch=gc())x=x*10+(ch^48);
+        (y)&amp;&amp;(x=-x);return;}
+    I void flush(){fwrite(buffer,1,p1+1,stdout);p1=-1;return;}
+    I void pc(int ch){if(p1==p2)flush();buffer[++p1]=ch;return;}
+    template&lt;class T&gt;I void write(T x){
+        static char buf[20];static int len =-1;
+        if(x&gt;=0){do buf[++len]=(x%10)^48,x/=10;while(x);}
+        else{pc('-');do buf[++len]=(-(x%10))^48,x/=10;while(x);}
+        while(len&gt;=0)pc(buf[len--]);
+        return;}
+}
+using namespace IO;
+int tot,s,t;
+const int maxn = 5000+50;
+const int maxm = 200000+200;
+#define ci const int &amp;
+struct edge{
+    int u,v,f,n;
+    I edge(ci uu =0,ci vv=0,ci ff=0,ci nn=0):u(uu),v(vv),f(ff),n(nn){}
+}e[maxm];
+int cnt=1,head[maxn],cur[maxn],gap[maxn],dis[maxn];
+I void add(ci u,ci v,ci f){
+    e[++cnt]=edge(u,v,f,head[u]),head[u]=cnt;
+    e[++cnt]=edge(v,u,0,head[v]),head[v]=cnt;
+}
+I void bfs(){
+    memset(dis,0,sizeof dis);
+    memset(gap,0,sizeof gap);
+    queue&lt;int&gt;q;q.push(t),gap[dis[t]=1]++;
+    while(!q.empty()){
+        int u=q.front();q.pop();
+        for(int ee=head[u],v;v=e[ee].v,ee;ee=e[ee].n)
+        if(!dis[v])gap[dis[v]=dis[u]+1]++,q.push(v);
+    }
+}
+int dfs(ci u,ci flow){
+    if(u==t)return flow;
+    int us=0,f;
+    for(int ee=cur[u],v;cur[u]=ee,v=e[ee].v,ee;ee=e[ee].n)
+        if(dis[v]==dis[u]-1){
+            if(f=dfs(v,min(flow-us,e[ee].f)))
+                e[ee].f-=f,e[ee^1].f+=f,us+=f;
+            if(us==flow)return flow;
+        }
+    (--gap[dis[u]])?(++gap[++dis[u]]):dis[s]=tot+1;
+    return us;
+}
+I int isap(){
+    int ans=0;
+    bfs();
+    while(dis[s]&lt;=tot+1)
+        memcpy(cur,head,sizeof head),
+        ans+=dfs(s,inf);
+    return ans;
+}
+int n,a[maxn],dp[maxn];
+#define ls(i) (i&lt;&lt;1)
+#define rs(i) (i&lt;&lt;1|1)
+signed main(){
+    read(n);
+    FOR(i,1,n)read(a[i]),dp[i]=1;
+    FOR(i,1,n)
+        FOR(j,1,i-1)
+            if(a[j]&lt;=a[i])dp[i]=max(dp[i],dp[j]+1);
+    int len;FOR(i,1,n)len=max(len,dp[i]);
+    write(len),pc('\n');
+    s=0,t=1;tot=2+2*n;
+    FOR(i,1,n)if(dp[i]==1)add(s,ls(i),1);
+    FOR(i,1,n)if(dp[i]==len)add(rs(i),t,1);
+    FOR(i,1,n)add(ls(i),rs(i),1);
+    FOR(i,1,n)
+        FOR(j,1,i-1)
+            if(a[j]&lt;=a[i]&amp;&amp;dp[j]+1==dp[i])
+                add(rs(j),ls(i),1);
+    int last;
+    write(last=isap()),pc('\n');
+    add(ls(1),rs(1),inf),add(s,ls(1),inf);
+    if(dp[n]==len)add(ls(n),rs(n),inf),add(rs(n),t,inf);
+    write(last+isap()),pc('\n');
+    flush();
+    return 0;
+}
 </code></pre>
 ]]></content>
     </entry>
