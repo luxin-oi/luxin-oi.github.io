@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://luxin-oi.github.io/</id>
     <title>luxin</title>
-    <updated>2020-03-06T10:23:08.924Z</updated>
+    <updated>2020-03-09T02:20:39.039Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://luxin-oi.github.io/"/>
     <link rel="self" href="https://luxin-oi.github.io/atom.xml"/>
@@ -200,7 +200,7 @@ signed main(){
     return 0;
 }
 </code></pre>
-<h3 id="zkw费用流费用流板子">zkw费用流（费用流板子）：</h3>
+<h3 id="费用流费用流板子">费用流（费用流板子）：</h3>
 <pre><code>#include &lt;algorithm&gt;
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
@@ -854,6 +854,10 @@ signed main(){
     return 0;
 }
 </code></pre>
+<h3 id="p2762-太空飞行计划问题"><a href="https://www.luogu.com.cn/problem/P2762">P2762 太空飞行计划问题</a></h3>
+<p>最大权闭合图问题，考虑如下建图方案，由源点S向每个实验仪器连边，流量为费用，由实验向汇点T连边，流量为获利，由实验仪器向对应的实验连边，流量为inf，对所建图求最小割，即最小割为ans，则最后答案为总实验的获利-ans；<br>
+（若割边是源点到仪器则表示仪器不选用，若割边为实验则代表实验不选用）<br>
+（）</p>
 ]]></content>
     </entry>
     <entry>
