@@ -899,8 +899,321 @@ signed main(){
 </code></pre>
 <h3 id="p2762-太空飞行计划问题"><a href="https://www.luogu.com.cn/problem/P2762">P2762 太空飞行计划问题</a></h3>
 <p>最大权闭合图问题，考虑如下建图方案，由源点S向每个实验仪器连边，流量为费用，由实验向汇点T连边，流量为获利，由实验仪器向对应的实验连边，流量为inf，对所建图求最小割，即最小割为ans，则最后答案为总实验的获利-ans；<br>
-（若割边是源点到仪器则表示仪器不选用，若割边为实验则代表实验不选用）<br>
-（）</p>
+（若割边是源点到仪器则表示仪器不选用，若割边为实验则代表实验不选用）</p>
+<h3 id="p1251-餐巾计划问题"><a href="https://www.luogu.com.cn/problem/P1251">P1251 餐巾计划问题</a></h3>
+<p>(<s>之前写的忘了保存挂了，我哭了，嘤嘤嘤</s>)<br>
+我们考虑如下建图方式<br>
+将每一天拆为两个点，分别表示旧餐巾和新餐巾。<br>
+（消耗=产生=r）（不特别说明，费用为零，流量为inf）<br>
+由源点向每天的旧餐巾连接一条流量为产生的边，表示每天产生的旧餐巾。<br>
+由每天的新餐巾向汇点连接一条流量为消耗的边，表示每天消耗的新餐巾。<br>
+由源点向每天的新餐巾连接一条费用的p的边，表示每天购买的新餐巾。<br>
+由每天的旧餐巾向时间加m/n处的新餐巾连接一条费用为f/s的边，表示快/慢洗的餐巾。<br>
+这样建图我们保证了，最大流一定为每天消耗的新餐巾的总和，最小费用即为最小花费。</p>
+<pre><code>#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;cctype&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#define int long long
+using namespace std;
+#define I inline
+#define R register
+#define inf 2147483647
+#define FOR(i,begin,end) for(R int i=begin;i&lt;=end;++i)
+#define ROF(i,begin,end) for(R int i=begin;i&gt;=end;--i)
+
+namespace IO{
+    char buf[1&lt;&lt;21],*pa=buf,*pb=buf;
+    char buffer[1&lt;&lt;21];int p1=-1;const int p2=(1&lt;&lt;21)-1; 
+    I char gc(){return pa==pb&amp;&amp;(pb=(pa=buf)+fread(buf,1,1&lt;&lt;21,stdin),pa==pb)?EOF:*pa++;}
+    template&lt;class T&gt;I void read(T &amp;x){
+        x=0;R int y=0;R char ch=gc();
+        for(;!isdigit(ch);ch=gc())y=ch=='-';
+        for(;isdigit(ch);ch=gc())x=x*10+(ch^48);
+        (y)&amp;&amp;(x=-x);return;}
+    I void flush(){fwrite(buffer,1,p1+1,stdout);p1=-1;return;}
+    I void pc(int ch){if(p1==p2)flush();buffer[++p1]=ch;return;}
+    template&lt;class T&gt;I void write(T x){
+        static char buf[20];static int len =-1;
+        if(x&gt;=0){do buf[++len]=(x%10)^48,x/=10;while(x);}
+        else{pc('-');do buf[++len]=(-(x%10))^48,x/=10;while(x);}
+        while(len&gt;=0)pc(buf[len--]);
+        return;}
+}
+using namespace IO;
+
+const int maxn = 50000+500;
+const int maxm = 200000+2000;
+#define ci const int &amp;
+
+struct edge{
+    int u,v,f,w,n;
+    I edge(ci uu=0,ci vv=0,ci ff=0,ci ww=0,ci nn=0):u(uu),v(vv),f(ff),w(ww),n(nn){}
+}e[maxm];
+int dis[maxn],vis[maxn],cur[maxn],head[maxn],cnt=1,n,m,s,t;
+int cost=0,flow=0;
+I void add(ci u,ci v,ci f,ci w){
+    e[++cnt]=edge(u,v,f,w,head[u]),head[u]=cnt;
+    e[++cnt]=edge(v,u,0,-w,head[v]),head[v]=cnt;
+}
+I bool spfa(ci s,ci t){
+    memset(vis,0,sizeof vis);
+    memset(dis,0x3f,sizeof dis);
+    deque&lt;int&gt;q;q.push_front(t);
+    vis[t]=1,dis[t]=0;
+    while(!q.empty()){
+        int u=q.front();q.pop_front();
+        for(int ee=head[u],v;v=e[ee].v,ee;ee=e[ee].n)
+            if(e[ee^1].f&gt;0&amp;&amp;dis[v]&gt;dis[u]-e[ee].w){
+                dis[v]=dis[u]-e[ee].w;
+                if(!vis[v])vis[v]=1,(!q.empty()&amp;&amp;dis[q.front()]&gt;dis[v])?
+                q.push_front(v):
+                q.push_back(v);
+            }
+        vis[u]=0;
+    }
+    return dis[s]==0x3f3f3f3f3f3f3f3f?0:1;
+}
+int dfs(ci u,ci ff){
+    if(u==t)return vis[t]=1,ff;
+    int us=0,f;vis[u]=1;
+    for(int ee=cur[u],v;cur[u]=ee,v=e[ee].v,ee;ee=e[ee].n)
+        if(vis[v]==0&amp;&amp;e[ee].f&gt;0&amp;&amp;dis[u]-e[ee].w==dis[v]){
+            if((f=dfs(v,min(e[ee].f,ff-us)))&gt;0)
+                cost+=f*e[ee].w,e[ee].f-=f,e[ee^1].f+=f,us+=f;
+            if(us==ff)break;
+        }
+    return us;
+}
+I void cost_flow(){
+    while(spfa(s,t)){
+        vis[t]=1;
+        while(vis[t]){
+            memcpy(cur,head,sizeof head);
+            memset(vis,0,sizeof vis);
+            flow+=dfs(s,inf);
+        }
+    }
+}
+int r[maxn];
+#define ls(o) (o&lt;&lt;1)
+#define rs(o) (o&lt;&lt;1|1)
+signed main(){
+    read(n);
+    int p,t1,c1,t2,c2;
+    s=rs(0),t=ls(n+2);
+    FOR(i,1,n)
+        read(r[i]),add(s,ls(i),r[i],0),add(rs(i),t,r[i],0);
+    read(p),read(t1),read(c1),read(t2),read(c2);
+    FOR(i,1,n){
+        add(s,rs(i),inf,p);
+        if(i+1&lt;=n)add(ls(i),ls(i+1),inf,0);
+        if(i+t1&lt;=n)add(ls(i),rs(i+t1),inf,c1);
+        if(i+t2&lt;=n)add(ls(i),rs(i+t2),inf,c2);
+    }
+    cost_flow();
+    write(cost);
+    flush();
+    return 0;
+}
+</code></pre>
+<p>###<a href="https://www.luogu.com.cn/problem/P4013">P4013 数字梯形问题</a><br>
+我们考虑拆点控制流量，然后就没了。<br>
+还有无法在残量网络上继续加边跑最小费用。<br>
+洛谷好像不给数据，然后手写了一个数据生成。</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+#define I inline
+#define R register
+#define inf 1073742823
+#define FOR(i,begin,end) for(R int i=begin;i&lt;=end;++i)
+#define ROF(i,begin,end) for(R int i=begin;i&gt;=end;--i)
+namespace IO{
+	char buf[1&lt;&lt;21],*pa=buf,*pb=buf;
+	char buffer[1&lt;&lt;21];int p1=-1;const int p2=(1&lt;&lt;21)-1; 
+	I char gc(){return pa==pb&amp;&amp;(pb=(pa=buf)+fread(buf,1,1&lt;&lt;21,stdin),pa==pb)?EOF:*pa++;}
+	template&lt;class T&gt;I void read(T &amp;x){
+		x=0;R int y=0;R char ch=gc();
+		for(;!isdigit(ch);ch=gc())y=ch=='-';
+		for(;isdigit(ch);ch=gc())x=(x&lt;&lt;3)+(x&lt;&lt;1)+(ch^48);
+		(y)&amp;&amp;(x=-x);return;}
+	I void flush(){fwrite(buffer,1,p1+1,stdout);p1=-1;return;}
+	I void pc(int ch){if(p1==p2)flush();buffer[++p1]=ch;return;}
+	template&lt;class T&gt;I void write(T x){
+		static char buf[20];static int len =-1;
+		if(x&gt;=0){do buf[++len]=(x%10)^48,x/=10;while(x);}
+		else{pc('-');do buf[++len]=(-(x%10))^48,x/=10;while(x);}
+		while(len&gt;=0)pc(buf[len--]);
+		return;}
+}
+using namespace IO;
+int main(){
+	srand(GetTickCount());
+	int n=10,m=2;
+	write(m),pc(' '),write(n),pc('\n');
+	FOR(i,m,m+n-1)
+	{
+        FOR(j,1,i)write(rand()%100),pc(' ');
+		pc('\n');
+	}
+	flush();
+	return 0;
+}
+</code></pre>
+<p>题目的代码</p>
+<pre><code>#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;cctype&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+using namespace std;
+#define I inline
+#define R register
+#define inf 1073742823
+#define FOR(i,begin,end) for(R int i=begin;i&lt;=end;++i)
+#define ROF(i,begin,end) for(R int i=begin;i&gt;=end;--i)
+
+namespace IO{
+    char buf[1&lt;&lt;21],*pa=buf,*pb=buf;
+    char buffer[1&lt;&lt;21];int p1=-1;const int p2=(1&lt;&lt;21)-1; 
+    I char gc(){return pa==pb&amp;&amp;(pb=(pa=buf)+fread(buf,1,1&lt;&lt;21,stdin),pa==pb)?EOF:*pa++;}
+    template&lt;class T&gt;I void read(T &amp;x){
+        x=0;R int y=0;R char ch=gc();
+        for(;!isdigit(ch);ch=gc())y=ch=='-';
+        for(;isdigit(ch);ch=gc())x=x*10+(ch^48);
+        (y)&amp;&amp;(x=-x);return;}
+    I void flush(){fwrite(buffer,1,p1+1,stdout);p1=-1;return;}
+    I void pc(int ch){if(p1==p2)flush();buffer[++p1]=ch;return;}
+    template&lt;class T&gt;I void write(T x){
+        static char buf[20];static int len =-1;
+        if(x&gt;=0){do buf[++len]=(x%10)^48,x/=10;while(x);}
+        else{pc('-');do buf[++len]=(-(x%10))^48,x/=10;while(x);}
+        while(len&gt;=0)pc(buf[len--]);
+        return;}
+}
+using namespace IO;
+
+const int maxn = 50000+500;
+const int maxm = 2000000+2000;
+#define ci const int &amp;
+
+struct edge{
+    int u,v,f,w,n;
+    I edge(ci uu=0,ci vv=0,ci ff=0,ci ww=0,ci nn=0):u(uu),v(vv),f(ff),w(ww),n(nn){}
+}e[maxm];
+int dis[maxn],vis[maxn],cur[maxn],head[maxn],cnt=1,n,m,s,t;
+int cost=0,flow=0;
+I void add(ci u,ci v,ci f,ci w){
+    e[++cnt]=edge(u,v,f,w,head[u]),head[u]=cnt;
+    e[++cnt]=edge(v,u,0,-w,head[v]),head[v]=cnt;
+}
+I bool spfa(ci s,ci t){
+    memset(vis,0,sizeof vis);
+    memset(dis,0x3f,sizeof dis);
+    deque&lt;int&gt;q;q.push_front(t);
+    vis[t]=1,dis[t]=0;
+    while(!q.empty()){
+        int u=q.front();q.pop_front();
+        for(int ee=head[u],v;v=e[ee].v,ee;ee=e[ee].n)
+            if(e[ee^1].f&gt;0&amp;&amp;dis[v]&gt;dis[u]-e[ee].w){
+                dis[v]=dis[u]-e[ee].w;
+                if(!vis[v])vis[v]=1,(!q.empty()&amp;&amp;dis[q.front()]&gt;dis[v])?
+                q.push_front(v):
+                q.push_back(v);
+            }
+        vis[u]=0;
+    }
+    return dis[s]==0x3f3f3f3f?0:1;
+}
+int dfs(ci u,ci ff){
+    if(u==t)return vis[t]=1,ff;
+    int us=0,f;vis[u]=1;
+    for(int ee=cur[u],v;cur[u]=ee,v=e[ee].v,ee;ee=e[ee].n)
+        if(vis[v]==0&amp;&amp;e[ee].f&gt;0&amp;&amp;dis[u]-e[ee].w==dis[v]){
+            if((f=dfs(v,min(e[ee].f,ff-us)))&gt;0)
+                cost+=f*e[ee].w,e[ee].f-=f,e[ee^1].f+=f,us+=f;
+            if(us==ff)break;
+        }
+    return us;
+}
+I void cost_flow(){
+    while(spfa(s,t)){
+        vis[t]=1;
+        while(vis[t]){
+            memcpy(cur,head,sizeof head);
+            memset(vis,0,sizeof vis);
+            flow+=dfs(s,inf);
+        }
+    }
+}
+I void clear(){
+    memset(head,0,sizeof head);
+    memset(e,0,sizeof e);
+    cnt=1;cost=0,flow=0;
+}
+#define ls(o) (o&lt;&lt;1)
+#define rs(o) (o&lt;&lt;1|1)
+int a[50][50],id[50][50];
+signed main(){
+    s=ls(0),t=rs(0);
+    int tot=0;
+    read(m),read(n);
+    FOR(i,m,m+n-1)
+        FOR(j,1,i)
+            read(a[i][j]),id[i][j]=++tot;
+    // work 1
+    FOR(i,1,m)
+        add(s,ls(id[m][i]),1,0);
+    FOR(i,m,m+n-1)
+        FOR(j,1,i)
+            add(ls(id[i][j]),rs(id[i][j]),1,-a[i][j]);
+    FOR(i,m,m+n-2)
+        FOR(j,1,i)
+            add(rs(id[i][j]),ls(id[i+1][j]),1,0),
+            add(rs(id[i][j]),ls(id[i+1][j+1]),1,0);
+    FOR(i,1,m+n-1)
+        add(rs(id[m+n-1][i]),t,1,0);
+    cost_flow();
+    write(-cost),pc('\n');
+    // work 2
+    clear();
+    FOR(i,1,m)
+        add(s,ls(id[m][i]),1,0);
+    FOR(i,m,m+n-1)
+        FOR(j,1,i)
+            add(ls(id[i][j]),rs(id[i][j]),inf,-a[i][j]);
+    FOR(i,m,m+n-2)
+        FOR(j,1,i)
+            add(rs(id[i][j]),ls(id[i+1][j]),1,0),
+            add(rs(id[i][j]),ls(id[i+1][j+1]),1,0);
+    FOR(i,1,m+n-1)
+        add(rs(id[m+n-1][i]),t,1,0);
+    cost_flow();
+    write(-cost),pc('\n');
+    // work 3
+    clear();
+    FOR(i,1,m)
+        add(s,ls(id[m][i]),1,0);
+    FOR(i,m,m+n-1)
+        FOR(j,1,i)
+            add(ls(id[i][j]),rs(id[i][j]),inf,-a[i][j]);
+    FOR(i,m,m+n-2)
+        FOR(j,1,i)
+            add(rs(id[i][j]),ls(id[i+1][j]),inf,0),
+            add(rs(id[i][j]),ls(id[i+1][j+1]),inf,0);
+    FOR(i,1,m+n-1)
+        add(rs(id[m+n-1][i]),t,inf,0);
+    cost_flow();
+    write(-cost),pc('\n');
+    flush();
+    return 0;
+}
+</code></pre>
 
                 </div>
             </article>
