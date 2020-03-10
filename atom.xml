@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://luxin-oi.github.io/</id>
     <title>luxin</title>
-    <updated>2020-03-10T01:43:54.338Z</updated>
+    <updated>2020-03-10T01:49:08.488Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://luxin-oi.github.io/"/>
     <link rel="self" href="https://luxin-oi.github.io/atom.xml"/>
@@ -19,7 +19,7 @@
         <content type="html"><![CDATA[<p><s>很久之前就想要学习网络流了，最近也刚学了网络流，于是便有了本篇博客。</s></p>
 <h2 id="关于算法">关于算法：</h2>
 <h3 id="dinic众所周知网络流不卡dinic">Dinic（<strong>众所周知网络流不卡Dinic</strong>）：</h3>
-<pre><code>#include &lt;algorithm&gt;
+<pre><code class="language-c++">#include &lt;algorithm&gt;
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
@@ -114,7 +114,7 @@ signed main(){
 }
 </code></pre>
 <h3 id="isap它会更快点">ISAP（它会更快点）：</h3>
-<pre><code>#include &lt;algorithm&gt;
+<pre><code class="language-c++">#include &lt;algorithm&gt;
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
@@ -201,7 +201,7 @@ signed main(){
 }
 </code></pre>
 <h3 id="费用流费用流板子">费用流（费用流板子）：</h3>
-<pre><code>#include &lt;algorithm&gt;
+<pre><code class="language-c++">#include &lt;algorithm&gt;
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
@@ -307,7 +307,7 @@ signed main(){
 <p>显然的一个二分图匹配问题，还要输出方案；</p>
 <p>我们考虑建图，首先一个飞行员只能匹配一个飞行员，所以我们从S向一类飞行员连边，从另一类飞行员向T连边，边权为1，然后对于能匹配的飞行员我们连接1或者inf的边（本体都可），完成建图。</p>
 <p>关于输出方案：考虑残量网络上的反向边发生流量改变即可。</p>
-<pre><code>#include &lt;algorithm&gt;
+<pre><code class="language-c++">#include &lt;algorithm&gt;
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
@@ -419,7 +419,7 @@ signed main(){
 <h3 id="p3254-圆桌问题"><a href="https://www.luogu.com.cn/problem/P3254">P3254 圆桌问题</a></h3>
 <p>仍然是一个类似二分图的问题，也要输出方案。</p>
 <p>我们考虑从S向每个单位连接流量为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>s</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">s_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>的边，表示这个单位的人数，从每个餐桌向T连接流量为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>c</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">c_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>的边，表示餐桌可以容纳的人数，对于所有的单位向所有的餐桌连一条流量为1的边，表示同一个单位来的代表不在同一个餐桌就餐,建图完成。输出方案与上题同理。</p>
-<pre><code>#include &lt;algorithm&gt;
+<pre><code class="language-c++">#include &lt;algorithm&gt;
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
@@ -523,7 +523,7 @@ signed main(){
 <p>题目渐渐有了难度，<s>模板题洛谷也给了提示</s></p>
 <p>我们考虑拆点，把一个点拆成两个点，第一个拆点表示出边，第二个拆点表示入边，我们把S向第一个拆点连一条流量为1的边，表示这个点的出度最大为1，把第二个拆点向T连接一条流量为1的边,表示这个点的最大入度为1，然后我们连接原图中的边，流量为1，表示存在路径，建图完成。</p>
 <p>我们对原图跑一个最大流，显然就是匹配数，所以n-匹配数即为答案，关于路径输出和路径起点，与第一题同理。</p>
-<pre><code>#include &lt;algorithm&gt;
+<pre><code class="language-c++">#include &lt;algorithm&gt;
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
@@ -634,7 +634,7 @@ signed main(){
 </code></pre>
 <h3 id="p2765-魔术球问题"><a href="https://www.luogu.com.cn/problem/P2765">P2765 魔术球问题</a></h3>
 <p>显然这是一个需要不断加边的网络流，我们将一个数向与他组成完全平方数的数的拆点连边，S向原数连边，拆点向T连边，跑网络流即可，与上一题思想相似。</p>
-<pre><code>#include &lt;algorithm&gt;
+<pre><code class="language-c++">#include &lt;algorithm&gt;
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
@@ -751,7 +751,7 @@ signed main(){
 <p>第一问我们考虑直接DP；<br>
 第二问我们向原点和拆点连一条为1的边表示只能被选一次，然后对于DP值等于1的从源点S向其连边，流量为1，对于DP等于长度的，从其向汇点T连边，流量为1，表示路径可行性。<br>
 第三问在残量网络上加源点到1的边，假如最后一个数在最长上升子序列上，连接一条向汇点的边，还有原点向拆点连边，流量为inf，表示可以无限使用。</p>
-<pre><code>#include &lt;algorithm&gt;
+<pre><code class="language-c++">#include &lt;algorithm&gt;
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
@@ -867,7 +867,7 @@ signed main(){
 由源点向每天的新餐巾连接一条费用的p的边，表示每天购买的新餐巾。<br>
 由每天的旧餐巾向时间加m/n处的新餐巾连接一条费用为f/s的边，表示快/慢洗的餐巾。<br>
 这样建图我们保证了，最大流一定为每天消耗的新餐巾的总和，最小费用即为最小花费。</p>
-<pre><code>#include &lt;algorithm&gt;
+<pre><code class="language-c++">#include &lt;algorithm&gt;
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
@@ -981,7 +981,7 @@ signed main(){
 我们考虑拆点控制流量，然后就没了。<br>
 还有无法在残量网络上继续加边跑最小费用。<br>
 洛谷好像不给数据，然后手写了一个数据生成。</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 #define I inline
 #define R register
@@ -1021,7 +1021,7 @@ int main(){
 }
 </code></pre>
 <p>题目的代码</p>
-<pre><code>#include &lt;algorithm&gt;
+<pre><code class="language-c++">#include &lt;algorithm&gt;
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
