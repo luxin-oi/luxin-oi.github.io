@@ -345,7 +345,7 @@ signed main(){
 <p><s>个人喜欢用dinic跑非一次性建边的网络流，用isap跑一次性建边的网络流，用zkw跑费用流，至于HLPP我还不会</s><br>
 当然网络流还是要靠建图。</p>
 <hr>
-<h2 id="网络流24题"><a href="https://www.luogu.com.cn/problem/list?tag=332">网络流24题</a>：</h2>
+<h2 id="网络流24题"><a href="https://www.luogu.com.cn/problem/list?tag=332">网络流24题</a>：（仅包含部分题目）</h2>
 <h3 id="p2756-飞行员配对方案问题"><a href="https://www.luogu.com.cn/problem/P2756">P2756 飞行员配对方案问题</a></h3>
 <p>显然的一个二分图匹配问题，还要输出方案；</p>
 <p>我们考虑建图，首先一个飞行员只能匹配一个飞行员，所以我们从S向一类飞行员连边，从另一类飞行员向T连边，边权为1，然后对于能匹配的飞行员我们连接1或者inf的边（本体都可），完成建图。</p>
@@ -1020,10 +1020,17 @@ signed main(){
     return 0;
 }
 </code></pre>
-<p>###<a href="https://www.luogu.com.cn/problem/P4013">P4013 数字梯形问题</a><br>
-我们考虑拆点控制流量，然后就没了。<br>
+<p>###<a href="https://www.luogu.com.cn/problem/P4013">P4013 数字梯形问题</a></p>
+<p>我们考虑拆点控制流量，然后就没了。<br>
 还有无法在残量网络上继续加边跑最小费用。<br>
 洛谷好像不给数据，然后手写了一个数据生成。</p>
+<h3 id="第一问">第一问：</h3>
+<p>我们把拆点和原点连接一条流量为1（表次数限制），费用为-点值（表示费用），然后按照题意连边即可。</p>
+<h3 id="第二问">第二问：</h3>
+<p>将第一问拆点和原点的连边流量改为inf（表无次数限制）。<br>
+同时需要注意最下边一行的点，连接汇点T的边流量也要改为inf。</p>
+<h3 id="第三问">第三问：</h3>
+<p>除了源点向第一行的点的连边流量为1外，其他的流量为inf（表无次数限制）</p>
 <pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 #define I inline
@@ -1214,6 +1221,32 @@ signed main(){
     return 0;
 }
 </code></pre>
+<p>大概本博客就完结了，网络流二十四题的题目连接直接放到下面了：</p>
+<p><s><a href="https://www.luogu.com.cn/problem/P1251">P1251 餐巾计划问题</a></s><br>
+<a href="https://www.luogu.com.cn/problem/P1251">P2754 [CTSC1999]家园 / 星际转移问题</a><br>
+<s><a href="https://www.luogu.com.cn/problem/P2756">P2756 飞行员配对方案问题</a></s><br>
+<a href="https://www.luogu.com.cn/problem/P2761">P2761 软件补丁问题</a><br>
+<s><a href="https://www.luogu.com.cn/problem/P2762">P2762 太空飞行计划问题</a></s><br>
+<a href="https://www.luogu.com.cn/problem/P2763">P2763 试题库问题</a><br>
+<s><a href="https://www.luogu.com.cn/problem/P2764">P2764 最小路径覆盖问题</a></s><br>
+<s><a href="https://www.luogu.com.cn/problem/P2765">P2765 魔术球问题</a></s><br>
+<s><a href="https://www.luogu.com.cn/problem/P2766">P2766 最长不下降子序列问题</a></s><br>
+<a href="https://www.luogu.com.cn/problem/P2770">P2770 航空路线问题</a><br>
+<s><a href="https://www.luogu.com.cn/problem/P2774">P2774 方格取数问题</a></s><br>
+<a href="https://www.luogu.com.cn/problem/P2775">P2775 机器人路径规划问题</a><br>
+<s><a href="https://www.luogu.com.cn/problem/P3254">P3254 圆桌问题</a></s><br>
+<a href="https://www.luogu.com.cn/problem/P3355">P3355 骑士共存问题</a><br>
+<a href="https://www.luogu.com.cn/problem/P3356">P3356 火星探险问题</a><br>
+[P3357 最长k可重线段集问题]https://www.luogu.com.cn/problem/P3357)<br>
+<a href="https://www.luogu.com.cn/problem/P3358">P3358 最长k可重区间集问题</a><br>
+<a href="https://www.luogu.com.cn/problem/P4009">P4009 汽车加油行驶问题</a><br>
+<a href="https://www.luogu.com.cn/problem/P4011">P4011 孤岛营救问题</a><br>
+<a href="https://www.luogu.com.cn/problem/P4012">P4012 深海机器人问题</a><br>
+<s><a href="https://www.luogu.com.cn/problem/P4013">P4013 数字梯形问题</a></s><br>
+<a href="https://www.luogu.com.cn/problem/P4014">P4014 分配问题</a><br>
+<a href="https://www.luogu.com.cn/problem/P4015">P4015 运输问题</a><br>
+<a href="https://www.luogu.com.cn/problem/P4016">P4016 负载平衡问题</a></p>
+<p>##当然网络流24题只是比较基础的入门题目，本博客只提供入门方面的参考</p>
 
                 </div>
             </article>
