@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://luxin-oi.github.io/</id>
     <title>luxin</title>
-    <updated>2020-03-11T05:13:26.342Z</updated>
+    <updated>2020-03-11T14:45:57.989Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://luxin-oi.github.io/"/>
     <link rel="self" href="https://luxin-oi.github.io/atom.xml"/>
@@ -10,6 +10,467 @@
     <logo>https://luxin-oi.github.io/images/avatar.png</logo>
     <icon>https://luxin-oi.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, luxin</rights>
+    <entry>
+        <title type="html"><![CDATA[网络流模板]]></title>
+        <id>https://luxin-oi.github.io/post/wang-luo-liu-mo-ban/</id>
+        <link href="https://luxin-oi.github.io/post/wang-luo-liu-mo-ban/">
+        </link>
+        <updated>2020-03-11T14:42:34.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="dinic">Dinic</h3>
+<pre><code class="language-c++">const int maxn = 50000+50;
+const int maxm = 200000+200;
+#define Ci const int &amp;
+int n,m,s,t;
+struct edge{
+    int u,v,n,flow;
+    I edge(Ci _u=0,Ci _v=0,Ci _n=0,Ci _flow=0):u(_u),v(_v),n(_n),flow(_flow){}
+}e[maxm];
+int cnt=1,head[maxn],cur[maxn];
+I void add(Ci u,Ci v,Ci flow){
+    e[++cnt]=edge(u,v,head[u],flow),head[u]=cnt;
+    e[++cnt]=edge(v,u,head[v],0),head[v]=cnt;
+}
+int dep[maxn];
+I bool bfs(){
+    queue&lt;int&gt;q;
+    memset(dep,0,sizeof dep);
+    memcpy(cur,head,sizeof(head));
+    dep[s]=1,q.push(s);
+    while(!q.empty()){
+        int u=q.front();q.pop();
+        for(int ee=head[u],v;v=e[ee].v,ee;ee=e[ee].n)
+            if(e[ee].flow&amp;&amp;dep[v]==0)
+                dep[v]=dep[u]+1,q.push(v);
+    }
+    return dep[t];
+}
+int dfs(int u,int limit){
+    if(limit==0||u==t)return limit;
+    int flow=0,f;
+    for(int ee=cur[u],v;cur[u]=ee,v=e[ee].v,ee;ee=e[ee].n)
+        if(dep[v]==dep[u]+1&amp;&amp;(f=dfs(v,min(limit,e[ee].flow)))){
+            flow+=f;
+            limit-=f;
+            e[ee].flow-=f;
+            e[ee^1].flow+=f;
+            if(!limit)break;
+        }
+    return flow;
+}
+I int dinic(){
+    int ans=0;
+    while(bfs())
+            ans+=dfs(s,inf);
+        return ans;
+}
+signed main(){
+    read(n),read(m),read(s),read(t);
+    int u,v,f;
+    FOR(i,1,m)
+        read(u),read(v),read(f),
+        add(u,v,f);
+    write(dinic());
+    flush();
+    return 0;
+}
+</code></pre>
+<h3 id="isap">ISAP</h3>
+<pre><code class="language-c++">int tot,s,t;
+const int maxn = 50000+50;
+const int maxm = 200000+200;
+#define ci const int &amp;
+struct edge{
+    int u,v,f,n;
+    I edge(ci uu =0,ci vv=0,ci ff=0,ci nn=0):u(uu),v(vv),f(ff),n(nn){}
+}e[maxm];
+int cnt=1,head[maxn],cur[maxn],gap[maxn],dis[maxn];
+I void add(ci u,ci v,ci f){
+    e[++cnt]=edge(u,v,f,head[u]),head[u]=cnt;
+    e[++cnt]=edge(v,u,0,head[v]),head[v]=cnt;
+}
+I void bfs(){
+    // memset(dis,0,sizeof dis);
+    // memset(gap,0,sizeof gap);
+    queue&lt;int&gt;q;q.push(t),gap[dis[t]=1]++;
+    while(!q.empty()){
+        int u=q.front();q.pop();
+        for(int ee=head[u],v;v=e[ee].v,ee;ee=e[ee].n)
+        if(!dis[v])gap[dis[v]=dis[u]+1]++,q.push(v);
+    }
+}
+int dfs(ci u,ci flow){
+    if(u==t)return flow;
+    int us=0,f;
+    for(int ee=cur[u],v;cur[u]=ee,v=e[ee].v,ee;ee=e[ee].n)
+        if(dis[v]==dis[u]-1){
+            if(f=dfs(v,min(flow-us,e[ee].f)))
+                e[ee].f-=f,e[ee^1].f+=f,us+=f;
+            if(us==flow)return flow;
+        }
+    (--gap[dis[u]])?(++gap[++dis[u]]):dis[s]=tot+1;
+    return us;
+}
+I int isap(){
+    int ans=0;
+    bfs();
+    while(dis[s]&lt;=tot+1)
+        memcpy(cur,head,sizeof head),
+        ans+=dfs(s,inf);
+    return ans;
+}
+int n,m;
+signed main(){
+    int u,v,f;
+    read(n),read(m),read(s),read(t);
+    tot=n;
+    FOR(i,1,m)read(u),read(v),read(f),add(u,v,f);
+    write(isap());
+    flush();
+    return 0;
+}
+</code></pre>
+<h3 id="费用流">费用流</h3>
+<pre><code class="language-c++">const int maxn = 50000+500;
+const int maxm = 200000+2000;
+#define ci const int &amp;
+struct edge{
+    int u,v,f,w,n;
+    I edge(ci uu=0,ci vv=0,ci ff=0,ci ww=0,ci nn=0):u(uu),v(vv),f(ff),w(ww),n(nn){}
+}e[maxm];
+int dis[maxn],vis[maxn],cur[maxn],head[maxn],cnt=1,n,m,s,t;
+int cost=0,flow=0;
+I void add(ci u,ci v,ci f,ci w){
+    e[++cnt]=edge(u,v,f,w,head[u]),head[u]=cnt;
+    e[++cnt]=edge(v,u,0,-w,head[v]),head[v]=cnt;
+}
+I bool spfa(ci s,ci t){
+    memset(vis,0,sizeof vis);
+    memset(dis,0x3f,sizeof dis);
+    deque&lt;int&gt;q;q.push_front(t);
+    vis[t]=1,dis[t]=0;
+    while(!q.empty()){
+        int u=q.front();q.pop_front();
+        for(int ee=head[u],v;v=e[ee].v,ee;ee=e[ee].n)
+            if(e[ee^1].f&gt;0&amp;&amp;dis[v]&gt;dis[u]-e[ee].w){
+                dis[v]=dis[u]-e[ee].w;
+                if(!vis[v])vis[v]=1,(!q.empty()&amp;&amp;dis[q.front()]&gt;dis[v])?
+                q.push_front(v):
+                q.push_back(v);
+            }
+        vis[u]=0;
+    }
+    return dis[s]==0x3f3f3f3f?0:1;
+}
+int dfs(ci u,ci ff){
+    if(u==t)return vis[t]=1,ff;
+    int us=0,f;vis[u]=1;
+    for(int ee=cur[u],v;cur[u]=ee,v=e[ee].v,ee;ee=e[ee].n)
+        if(vis[v]==0&amp;&amp;e[ee].f&gt;0&amp;&amp;dis[u]-e[ee].w==dis[v]){
+            if((f=dfs(v,min(e[ee].f,ff-us)))&gt;0)
+                cost+=f*e[ee].w,e[ee].f-=f,e[ee^1].f+=f,us+=f;
+            if(us==ff)break;
+        }
+    return us;
+}
+I void cost_flow(){
+    while(spfa(s,t)){
+        vis[t]=1;
+        while(vis[t]){
+            memcpy(cur,head,sizeof head);
+            memset(vis,0,sizeof vis);
+            flow+=dfs(s,inf);
+        }
+    }
+}
+signed main(){
+    read(n),read(m),read(s),read(t);
+    int u,v,f,w;
+    FOR(i,1,m)
+        read(u),read(v),read(f),read(w),
+        add(u,v,f,w);
+    cost_flow();
+    write(flow),pc(' '),write(cost);
+    flush();
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[莫队模板]]></title>
+        <id>https://luxin-oi.github.io/post/mo-dui-mo-ban/</id>
+        <link href="https://luxin-oi.github.io/post/mo-dui-mo-ban/">
+        </link>
+        <updated>2020-03-11T14:40:34.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="莫队">莫队</h3>
+<pre><code class="language-c++">const int maxn = 1000000+100;
+int n,m,k,len,ans;
+int num[maxn],cnt[maxn],a[maxn];
+struct query{
+    int l,r,in,id;
+    I bool operator &lt;(const query &amp;a)const
+    {return (in^a.in)?in&lt;a.in:((in&amp;1)?r&lt;a.r:r&gt;a.r);}
+}q[maxn];
+signed main(){
+    read(n);
+    int QAQ=pow(n,0.6);
+    len=QAQ*QAQ*QAQ;
+    for(R int *S=a,*T=a+n;S!=T;)read(*++S);   
+    read(m);
+    int x,y;
+    FOR(i,1,m)
+        read(q[i].l),read(q[i].r),
+        q[i].in=(q[i].l-1)/len+1,
+        q[i].id=i;
+    sort(q+1,q+1+m);
+    int l=1,r=0;
+    FOR(i,1,m){
+        int x=q[i].l,y=q[i].r;
+        while(l&lt;x)ans-=(!--cnt[a[l++]]);
+        while(l&gt;x)ans+=(!cnt[a[--l]]++);
+        while(r&lt;y)ans+=(!cnt[a[++r]]++);
+        while(r&gt;y)ans-=(!--cnt[a[r--]]);
+        num[q[i].id]=ans;
+    }
+    for(R int *S=num,*T=num+m;S!=T;)write(*++S),pc('\n');
+    flush();
+    return 0;
+}
+</code></pre>
+<h3 id="待修莫队">待修莫队：</h3>
+<pre><code class="language-c++">const int maxn=2*1e6+10;
+int n,m,a[maxn],in[maxn];
+struct Query{
+    int x,y,pre,id;
+}Q[maxn];
+struct Change{
+    int pos,val;
+}C[maxn];
+int Qnum=0,Cnum=0;
+int cnt[maxn],ans=0,base,out[maxn];
+I int cmp(const Query &amp;a,const Query &amp;b){
+    if(a.x!=b.x)return in[a.x]&lt;in[b.x];
+    if(a.y!=b.x)return in[a.y]&lt;in[b.y];
+    return a.pre&lt;b.pre;
+}
+I void work(int now,int i){
+    if(C[now].pos&gt;=Q[i].x&amp;&amp;C[now].pos&lt;=Q[i].y){
+        if(--cnt[a[C[now].pos]]==0)ans--;
+        if(++cnt[C[now].val]==1)ans++;
+    }
+    swap(C[now].val,a[C[now].pos]);
+}
+I void MoQueue(){
+    int l=1,r=0,now=0;
+    FOR(i,1,Qnum){
+        while(l&lt;Q[i].x)ans-=!--cnt[a[l++]];
+        while(l&gt;Q[i].x)ans+=!cnt[a[--l]]++;
+        while(r&lt;Q[i].y)ans+=!cnt[a[++r]]++;
+        while(r&gt;Q[i].y)ans-=!--cnt[a[r--]];
+        while(now&lt;Q[i].pre)work(++now,i);
+        while(now&gt;Q[i].pre)work(now--,i);
+        out[Q[i].id]=ans;
+    }
+    FOR(i,1,Qnum)
+        write(out[i]),pc('\n');
+}
+signed main(){
+    read(n),read(m);
+    base=pow(n,(double)2/(double)3);
+    FOR(i,1,n)read(a[i]),in[i]=(i-1)/base+1;
+    while(m--){
+        if(Read()){
+            read(Q[++Qnum].x),
+            read(Q[Qnum].y),
+            Q[Qnum].pre=Cnum,
+            Q[Qnum].id=Qnum;
+        }else{
+            read(C[++Cnum].pos);
+            read(C[Cnum].val);
+        }
+    }
+    sort(Q+1,Q+Qnum+1,cmp);
+    MoQueue();
+    flush();
+    return 0;
+}
+</code></pre>
+<h3 id="树上莫队">树上莫队：</h3>
+<pre><code class="language-c++">//a,cnt,first,last,ans,belong,inp,vis,ncnt,l,r,now,size,bnum莫队相关
+int a[maxn],cnt[maxn],first[maxn],last[maxn];
+int ans[maxn],belong[maxn],inp[maxn],vis[maxn];
+int ord[maxn],val[maxn],head[maxn],dep[maxn];
+int fa[maxn][21],ecnt,ncnt,l=1,r,now,len,bnum,n,m;
+// ord Euler-pos first Euler-&gt;begin last Euler-&gt;end; 
+struct edge{
+    int v,n;
+    I edge(const int &amp;vv=0,const int &amp; nn=0):v(vv),n(nn){}
+}e[maxn];
+void add(int u,int v){
+    e[++ecnt]=edge(v,head[u]),head[u]=ecnt;
+    e[++ecnt]=edge(u,head[v]),head[v]=ecnt;
+}
+void dfs(int u){
+    ord[++ncnt]=u;
+    first[u]=ncnt;
+    for(int ee=head[u],v;v=e[ee].v,ee;ee=e[ee].n)
+        if(v!=fa[u][0]){
+            dep[v]=dep[u]+1;
+            fa[v][0]=u;
+            for(int i=1;(1&lt;&lt;i)&lt;=dep[v];++i)fa[v][i]=fa[fa[v][i-1]][i-1];
+            dfs(v);
+        }
+    ord[++ncnt]=u;
+    last[u]=ncnt;
+}
+int get_lca(int u,int v){
+    if(dep[u]&lt;dep[v])swap(u,v);
+    for(int i=20;i+1;--i)
+        if(dep[u]-(1&lt;&lt;i)&gt;=dep[v])u=fa[u][i];
+    if(u==v)return u;
+    for(int i=20;i+1;--i)
+        if(fa[u][i]!=fa[v][i])u=fa[u][i],v=fa[v][i];
+    return fa[u][0];
+}
+struct query{
+    int l,r,lca,id;
+}q[maxn];
+int cmp(const query &amp;a,const query &amp;b){
+    return (belong[a.l]^belong[b.l])?(belong[a.l]&lt;belong[b.l]):((belong[a.l]&amp;1)?a.r&lt;b.r:a.r&gt;b.r);
+}
+I void work(int pos){
+    vis[pos]?
+        now-=!--cnt[val[pos]]:
+        now+=!cnt[val[pos]]++;
+    vis[pos]^=1;
+}
+signed main(){
+    read(n),read(m);
+    FOR(i,1,n)read(val[i]),inp[i]=val[i];
+    sort(inp+1,inp+1+n);
+    int tot=unique(inp+1,inp+1+n)-inp-1;
+    FOR(i,1,n)
+        val[i]=lower_bound(inp+1,inp+tot+1,val[i])-inp;
+    int x,y;
+    FOR(i,1,n-1)read(x),read(y),add(x,y);
+    dep[1]=1;dfs(1);
+    len=sqrt(ncnt),bnum=ceil((double)ncnt/len);
+    FOR(i,1,bnum)
+        for(int j=len*(i-1)+1;j&lt;=i*len;++j)
+            belong[j]=i;
+    FOR(i,1,m){
+        int x,y,lca;
+        read(x),read(y),lca=get_lca(x,y);
+        if(first[x]&gt;first[y])swap(x,y);
+        if(x==lca){
+            q[i].l=first[x];
+            q[i].r=first[y];
+        }else{
+            q[i].l=last[x];
+            q[i].r=first[y];
+            q[i].lca=lca;
+        }
+        q[i].id=i;
+    }
+    sort(q+1,q+1+m,cmp);
+    FOR(i,1,m){
+        int ql=q[i].l,qr=q[i].r,lca=q[i].lca;
+        while(l&lt;ql)work(ord[l++]);
+        while(l&gt;ql)work(ord[--l]);
+        while(r&lt;qr)work(ord[++r]);
+        while(r&gt;qr)work(ord[r--]);
+        if(lca)work(lca);
+        ans[q[i].id]=now;
+        if(lca)work(lca);
+    }
+    FOR(i,1,m)write(ans[i]),pc('\n');
+    flush();
+    return 0;
+}
+</code></pre>
+<h3 id="回滚莫队">回滚莫队：</h3>
+<pre><code class="language-c++">#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+using namespace std;
+#define maxn 100100
+#define maxb 5050
+#define ll long long
+int aa[maxn], typ[maxn], cnt[maxn], cnt2[maxn], belong[maxn], lb[maxn], rb[maxn], inp[maxn];
+ll ans[maxn];
+struct query {
+    int l, r, id;
+} q[maxn];
+int n, m, size, bnum;
+#define isdigit(x) ((x) &gt;= '0' &amp;&amp; (x) &lt;= '9')
+inline int read() {
+    int res = 0;
+    char c = getchar();
+    while(!isdigit(c)) c = getchar();
+    while(isdigit(c)) res = (res &lt;&lt; 1) + (res &lt;&lt; 3) + (c ^ 48), c = getchar();
+    return res;
+}
+int cmp(query a, query b) {
+    return (belong[a.l] ^ belong[b.l]) ? belong[a.l] &lt; belong[b.l] : a.r &lt; b.r; 
+}
+int main() {
+    n = read(), m = read();
+    size = sqrt(n);
+    bnum = ceil((double) n / size);
+    for(int i = 1; i &lt;= bnum; ++i) {
+        lb[i] = size * (i - 1) + 1;
+        rb[i] = size * i;
+        for(int j = lb[i]; j &lt;= rb[i]; ++j) belong[j] = i;
+    }
+    rb[bnum] = n;
+    for(int i = 1; i &lt;= n; ++i) inp[i] = aa[i] = read();
+    sort(inp + 1, inp + n + 1);
+    int tot = unique(inp + 1, inp + n + 1) - inp - 1;
+    for(int i = 1; i &lt;= n; ++i) typ[i] = lower_bound(inp + 1, inp + tot + 1, aa[i]) - inp;
+    for(int i = 1; i &lt;= m; ++i) {
+        q[i].l = read(), q[i].r = read();
+        q[i].id = i;
+    }
+    sort(q + 1, q + m + 1, cmp);
+    int i = 1;
+    for(int k = 0; k &lt;= bnum; ++k) {
+        int l = rb[k] + 1, r = rb[k];
+        ll now = 0;
+        memset(cnt, 0, sizeof(cnt));
+        for( ; belong[q[i].l] == k; ++i) {
+            int ql = q[i].l, qr = q[i].r;
+            ll tmp;
+            if(belong[ql] == belong[qr]) {
+                tmp = 0;
+                for(int j = ql; j &lt;= qr; ++j) cnt2[typ[j]] = 0;
+                for(int j = ql; j &lt;= qr; ++j) {
+                    ++cnt2[typ[j]]; tmp = max(tmp, 1ll * cnt2[typ[j]] * aa[j]);
+                }
+                ans[q[i].id] = tmp;
+                continue;
+            }
+            while(r &lt; qr) {
+                ++r; ++cnt[typ[r]]; now = max(now, 1ll * cnt[typ[r]] * aa[r]);
+            }
+            tmp = now;
+            while(l &gt; ql){
+                --l; ++cnt[typ[l]]; now = max(now, 1ll * cnt[typ[l]] * aa[l]);
+            } 
+            ans[q[i].id] = now;
+            while(l &lt; rb[k] + 1) {
+                --cnt[typ[l]];
+                l++;
+            }
+            now = tmp;
+        }
+    }
+    for(int i = 1; i &lt;= m; ++i) printf(&quot;%lld\n&quot;, ans[i]);
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Lifting the Stone]]></title>
         <id>https://luxin-oi.github.io/post/lifting-the-stone/</id>
@@ -35,7 +496,7 @@
         <link href="https://luxin-oi.github.io/post/you-can-solve-a-geometry-problem-too/">
         </link>
         <updated>2020-03-11T01:41:32.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="题目连接"><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1086">题目连接</a></h2>
+        <content type="html"><![CDATA[<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1086">题目连接</a></p>
 <h3 id="题目大意">题目大意：</h3>
 <p>给出<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi><mo>(</mo><mn>1</mn><mo>≤</mo><mi>N</mi><mo>≤</mo><mn>100</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">N(1\le N \le 100)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8193em;vertical-align:-0.13597em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mclose">)</span></span></span></span>条线段判断有多少个交点，(假如多个线段交于一点应重复计数)。</p>
 <h3 id="题目做法">题目做法：</h3>
@@ -1370,26 +1831,6 @@ signed main(){
 <p>计算几何：<br>
 -<a href="https://luxin-oi.github.io/post/you-can-solve-a-geometry-problem-too/">1086</a><br>
 -<a href="https://luxin-oi.github.io/post/lifting-the-stone/">1115</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[BZOJ题单]]></title>
-        <id>https://luxin-oi.github.io/post/bzoj-ti-dan/</id>
-        <link href="https://luxin-oi.github.io/post/bzoj-ti-dan/">
-        </link>
-        <updated>2020-03-04T17:18:35.000Z</updated>
-        <content type="html"><![CDATA[<p>##<a href="http://www.lydsy.com/JudgeOnline/">BZOJ</a></p>
-<p>咕咕咕</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[POJ题单]]></title>
-        <id>https://luxin-oi.github.io/post/poj-ti-dan/</id>
-        <link href="https://luxin-oi.github.io/post/poj-ti-dan/">
-        </link>
-        <updated>2020-03-04T17:17:13.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="poj"><a href="http://poj.org/">POJ</a></h2>
-<p>咕咕咕</p>
 ]]></content>
     </entry>
 </feed>

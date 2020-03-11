@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>莫队模板 | luxin</title>
+<meta name="description" content="♥Andromeda♥">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://luxin-oi.github.io//favicon.ico?v=1583937949539">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://luxin-oi.github.io//styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://luxin-oi.github.io/">luxin</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="https://luxin-oi.github.io/post/ti-dan-suo-yin" class="menu">
+                题单
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>莫队模板</h1>
+            <p class="article-meta">
+              2020-03-11
+              
+                <a href="https://luxin-oi.github.io/tag/DvZciAChv/" class="badge secondary">
+                  莫队
+                </a>
+              
+                <a href="https://luxin-oi.github.io/tag/KERCPxCMT2/" class="badge warning">
+                  模板
+                </a>
+              
+            </p>
+            
+              <img src="https://luxin-oi.github.io//post-images/mo-dui-mo-ban.png" alt="莫队模板">
+            
+            <div class="post-content">
+              <h3 id="莫队">莫队</h3>
+<pre><code class="language-c++">const int maxn = 1000000+100;
+int n,m,k,len,ans;
+int num[maxn],cnt[maxn],a[maxn];
+struct query{
+    int l,r,in,id;
+    I bool operator &lt;(const query &amp;a)const
+    {return (in^a.in)?in&lt;a.in:((in&amp;1)?r&lt;a.r:r&gt;a.r);}
+}q[maxn];
+signed main(){
+    read(n);
+    int QAQ=pow(n,0.6);
+    len=QAQ*QAQ*QAQ;
+    for(R int *S=a,*T=a+n;S!=T;)read(*++S);   
+    read(m);
+    int x,y;
+    FOR(i,1,m)
+        read(q[i].l),read(q[i].r),
+        q[i].in=(q[i].l-1)/len+1,
+        q[i].id=i;
+    sort(q+1,q+1+m);
+    int l=1,r=0;
+    FOR(i,1,m){
+        int x=q[i].l,y=q[i].r;
+        while(l&lt;x)ans-=(!--cnt[a[l++]]);
+        while(l&gt;x)ans+=(!cnt[a[--l]]++);
+        while(r&lt;y)ans+=(!cnt[a[++r]]++);
+        while(r&gt;y)ans-=(!--cnt[a[r--]]);
+        num[q[i].id]=ans;
+    }
+    for(R int *S=num,*T=num+m;S!=T;)write(*++S),pc('\n');
+    flush();
+    return 0;
+}
+</code></pre>
+<h3 id="待修莫队">待修莫队：</h3>
+<pre><code class="language-c++">const int maxn=2*1e6+10;
+int n,m,a[maxn],in[maxn];
+struct Query{
+    int x,y,pre,id;
+}Q[maxn];
+struct Change{
+    int pos,val;
+}C[maxn];
+int Qnum=0,Cnum=0;
+int cnt[maxn],ans=0,base,out[maxn];
+I int cmp(const Query &amp;a,const Query &amp;b){
+    if(a.x!=b.x)return in[a.x]&lt;in[b.x];
+    if(a.y!=b.x)return in[a.y]&lt;in[b.y];
+    return a.pre&lt;b.pre;
+}
+I void work(int now,int i){
+    if(C[now].pos&gt;=Q[i].x&amp;&amp;C[now].pos&lt;=Q[i].y){
+        if(--cnt[a[C[now].pos]]==0)ans--;
+        if(++cnt[C[now].val]==1)ans++;
+    }
+    swap(C[now].val,a[C[now].pos]);
+}
+I void MoQueue(){
+    int l=1,r=0,now=0;
+    FOR(i,1,Qnum){
+        while(l&lt;Q[i].x)ans-=!--cnt[a[l++]];
+        while(l&gt;Q[i].x)ans+=!cnt[a[--l]]++;
+        while(r&lt;Q[i].y)ans+=!cnt[a[++r]]++;
+        while(r&gt;Q[i].y)ans-=!--cnt[a[r--]];
+        while(now&lt;Q[i].pre)work(++now,i);
+        while(now&gt;Q[i].pre)work(now--,i);
+        out[Q[i].id]=ans;
+    }
+    FOR(i,1,Qnum)
+        write(out[i]),pc('\n');
+}
+signed main(){
+    read(n),read(m);
+    base=pow(n,(double)2/(double)3);
+    FOR(i,1,n)read(a[i]),in[i]=(i-1)/base+1;
+    while(m--){
+        if(Read()){
+            read(Q[++Qnum].x),
+            read(Q[Qnum].y),
+            Q[Qnum].pre=Cnum,
+            Q[Qnum].id=Qnum;
+        }else{
+            read(C[++Cnum].pos);
+            read(C[Cnum].val);
+        }
+    }
+    sort(Q+1,Q+Qnum+1,cmp);
+    MoQueue();
+    flush();
+    return 0;
+}
+</code></pre>
+<h3 id="树上莫队">树上莫队：</h3>
+<pre><code class="language-c++">//a,cnt,first,last,ans,belong,inp,vis,ncnt,l,r,now,size,bnum莫队相关
+int a[maxn],cnt[maxn],first[maxn],last[maxn];
+int ans[maxn],belong[maxn],inp[maxn],vis[maxn];
+int ord[maxn],val[maxn],head[maxn],dep[maxn];
+int fa[maxn][21],ecnt,ncnt,l=1,r,now,len,bnum,n,m;
+// ord Euler-pos first Euler-&gt;begin last Euler-&gt;end; 
+struct edge{
+    int v,n;
+    I edge(const int &amp;vv=0,const int &amp; nn=0):v(vv),n(nn){}
+}e[maxn];
+void add(int u,int v){
+    e[++ecnt]=edge(v,head[u]),head[u]=ecnt;
+    e[++ecnt]=edge(u,head[v]),head[v]=ecnt;
+}
+void dfs(int u){
+    ord[++ncnt]=u;
+    first[u]=ncnt;
+    for(int ee=head[u],v;v=e[ee].v,ee;ee=e[ee].n)
+        if(v!=fa[u][0]){
+            dep[v]=dep[u]+1;
+            fa[v][0]=u;
+            for(int i=1;(1&lt;&lt;i)&lt;=dep[v];++i)fa[v][i]=fa[fa[v][i-1]][i-1];
+            dfs(v);
+        }
+    ord[++ncnt]=u;
+    last[u]=ncnt;
+}
+int get_lca(int u,int v){
+    if(dep[u]&lt;dep[v])swap(u,v);
+    for(int i=20;i+1;--i)
+        if(dep[u]-(1&lt;&lt;i)&gt;=dep[v])u=fa[u][i];
+    if(u==v)return u;
+    for(int i=20;i+1;--i)
+        if(fa[u][i]!=fa[v][i])u=fa[u][i],v=fa[v][i];
+    return fa[u][0];
+}
+struct query{
+    int l,r,lca,id;
+}q[maxn];
+int cmp(const query &amp;a,const query &amp;b){
+    return (belong[a.l]^belong[b.l])?(belong[a.l]&lt;belong[b.l]):((belong[a.l]&amp;1)?a.r&lt;b.r:a.r&gt;b.r);
+}
+I void work(int pos){
+    vis[pos]?
+        now-=!--cnt[val[pos]]:
+        now+=!cnt[val[pos]]++;
+    vis[pos]^=1;
+}
+signed main(){
+    read(n),read(m);
+    FOR(i,1,n)read(val[i]),inp[i]=val[i];
+    sort(inp+1,inp+1+n);
+    int tot=unique(inp+1,inp+1+n)-inp-1;
+    FOR(i,1,n)
+        val[i]=lower_bound(inp+1,inp+tot+1,val[i])-inp;
+    int x,y;
+    FOR(i,1,n-1)read(x),read(y),add(x,y);
+    dep[1]=1;dfs(1);
+    len=sqrt(ncnt),bnum=ceil((double)ncnt/len);
+    FOR(i,1,bnum)
+        for(int j=len*(i-1)+1;j&lt;=i*len;++j)
+            belong[j]=i;
+    FOR(i,1,m){
+        int x,y,lca;
+        read(x),read(y),lca=get_lca(x,y);
+        if(first[x]&gt;first[y])swap(x,y);
+        if(x==lca){
+            q[i].l=first[x];
+            q[i].r=first[y];
+        }else{
+            q[i].l=last[x];
+            q[i].r=first[y];
+            q[i].lca=lca;
+        }
+        q[i].id=i;
+    }
+    sort(q+1,q+1+m,cmp);
+    FOR(i,1,m){
+        int ql=q[i].l,qr=q[i].r,lca=q[i].lca;
+        while(l&lt;ql)work(ord[l++]);
+        while(l&gt;ql)work(ord[--l]);
+        while(r&lt;qr)work(ord[++r]);
+        while(r&gt;qr)work(ord[r--]);
+        if(lca)work(lca);
+        ans[q[i].id]=now;
+        if(lca)work(lca);
+    }
+    FOR(i,1,m)write(ans[i]),pc('\n');
+    flush();
+    return 0;
+}
+</code></pre>
+<h3 id="回滚莫队">回滚莫队：</h3>
+<pre><code class="language-c++">#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+using namespace std;
+#define maxn 100100
+#define maxb 5050
+#define ll long long
+int aa[maxn], typ[maxn], cnt[maxn], cnt2[maxn], belong[maxn], lb[maxn], rb[maxn], inp[maxn];
+ll ans[maxn];
+struct query {
+    int l, r, id;
+} q[maxn];
+int n, m, size, bnum;
+#define isdigit(x) ((x) &gt;= '0' &amp;&amp; (x) &lt;= '9')
+inline int read() {
+    int res = 0;
+    char c = getchar();
+    while(!isdigit(c)) c = getchar();
+    while(isdigit(c)) res = (res &lt;&lt; 1) + (res &lt;&lt; 3) + (c ^ 48), c = getchar();
+    return res;
+}
+int cmp(query a, query b) {
+    return (belong[a.l] ^ belong[b.l]) ? belong[a.l] &lt; belong[b.l] : a.r &lt; b.r; 
+}
+int main() {
+    n = read(), m = read();
+    size = sqrt(n);
+    bnum = ceil((double) n / size);
+    for(int i = 1; i &lt;= bnum; ++i) {
+        lb[i] = size * (i - 1) + 1;
+        rb[i] = size * i;
+        for(int j = lb[i]; j &lt;= rb[i]; ++j) belong[j] = i;
+    }
+    rb[bnum] = n;
+    for(int i = 1; i &lt;= n; ++i) inp[i] = aa[i] = read();
+    sort(inp + 1, inp + n + 1);
+    int tot = unique(inp + 1, inp + n + 1) - inp - 1;
+    for(int i = 1; i &lt;= n; ++i) typ[i] = lower_bound(inp + 1, inp + tot + 1, aa[i]) - inp;
+    for(int i = 1; i &lt;= m; ++i) {
+        q[i].l = read(), q[i].r = read();
+        q[i].id = i;
+    }
+    sort(q + 1, q + m + 1, cmp);
+    int i = 1;
+    for(int k = 0; k &lt;= bnum; ++k) {
+        int l = rb[k] + 1, r = rb[k];
+        ll now = 0;
+        memset(cnt, 0, sizeof(cnt));
+        for( ; belong[q[i].l] == k; ++i) {
+            int ql = q[i].l, qr = q[i].r;
+            ll tmp;
+            if(belong[ql] == belong[qr]) {
+                tmp = 0;
+                for(int j = ql; j &lt;= qr; ++j) cnt2[typ[j]] = 0;
+                for(int j = ql; j &lt;= qr; ++j) {
+                    ++cnt2[typ[j]]; tmp = max(tmp, 1ll * cnt2[typ[j]] * aa[j]);
+                }
+                ans[q[i].id] = tmp;
+                continue;
+            }
+            while(r &lt; qr) {
+                ++r; ++cnt[typ[r]]; now = max(now, 1ll * cnt[typ[r]] * aa[r]);
+            }
+            tmp = now;
+            while(l &gt; ql){
+                --l; ++cnt[typ[l]]; now = max(now, 1ll * cnt[typ[l]] * aa[l]);
+            } 
+            ans[q[i].id] = now;
+            while(l &lt; rb[k] + 1) {
+                --cnt[typ[l]];
+                l++;
+            }
+            now = tmp;
+        }
+    }
+    for(int i = 1; i &lt;= m; ++i) printf(&quot;%lld\n&quot;, ans[i]);
+    return 0;
+}
+</code></pre>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://luxin-oi.github.io/post/lifting-the-stone/">
+                <h3 class="post-title">
+                  Lifting the Stone
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
+
+          
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://luxin-oi.github.io//images/avatar.png?v=1583937949539" class="no-responsive avatar">
+    <div class="text-muted">♥Andromeda♥</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/wang-luo-liu-mo-ban/">网络流模板</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/mo-dui-mo-ban/">莫队模板</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/lifting-the-stone/">Lifting the Stone</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/you-can-solve-a-geometry-problem-too/">You can Solve a Geometry Problem too</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/wang-luo-liu/">网络流</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/uoj-ti-dan/">UOJ题单</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/ti-dan-suo-yin/">题单索引</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/atcoder-ti-dan/">Atcoder题单</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/cf-ti-dan/">CF题单</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/hdu-ti-dan/">HDU题单</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://luxin-oi.github.io/tag/pP3deGIEQ/" class="badge success">
+          网络流
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/KERCPxCMT2/" class="badge secondary">
+          模板
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/DvZciAChv/" class="badge success">
+          莫队
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/85DztP89b8/" class="badge ">
+          hdu
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/PJ7xCvoFn/" class="badge secondary">
+          计算几何
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/-p_9VOJ5I/" class="badge success">
+          暴力
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/KtfFdo7cG/" class="badge ">
+          题单
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/kYstlox_XS/" class="badge secondary">
+          图论
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/_wSiMrkmu/" class="badge warning">
+          总结
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/-Rh9xu2bB/" class="badge secondary">
+          数据结构
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/siQEGz8oc/" class="badge secondary">
+          数学
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/m-756zIIR/" class="badge success">
+          else
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+     | <a class="rss" href="https://luxin-oi.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '3dd0e4026cfbe60780d9',
+        clientSecret: '28d1aba10ffa097bbfb31253fb3676866783cc2f',
+        repo: 'luxin-oi.github.io',
+        owner: 'luxin-oi',
+        admin: ['luxin-oi'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
