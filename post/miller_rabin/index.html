@@ -1,65 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>luxin</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="stylesheet" href="/styles/main.css">
-    <link rel="stylesheet" href="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/css/mdui.min.css">
-    <link rel="stylesheet" href="/media/css/post.css">
-    <link rel="stylesheet" href="/media/live2d/css/live2d.css" />
-    
-</head>
-<body class=" mdui-appbar-with-toolbar  mdui-theme-primary-pink mdui-theme-accent-pink">
-<header class="mdui-toolbar mdui-color-pink mdui-appbar-fixed mdui-appbar-scroll-toolbar-hide" style="z-index: 1000">
-    <a href="javascript:;" mdui-drawer="{target: '#left-drawer',overlay:true}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
-    <span class="mdui-typo-title">luxin</span>
-    <div class="mdui-toolbar-spacer"></div>
-<!--    <a href="javascript:history.go(0);" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
-    <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
-</header>
+<html>
+  <head>
+    <meta charset="utf-8" >
 
-<div class="mdui-drawer mdui-color-white mdui-drawer-full-height mdui-drawer-close" id="left-drawer">
-    <ul class="mdui-list">
-        <li class="mdui-subheader">菜单</li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/" class="mdui-list-item-content">首页</a>
-        </li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/archives" class="mdui-list-item-content">归档</a>
-        </li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/tags" class="mdui-list-item-content">标签</a>
-        </li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/post/about" class="mdui-list-item-content">关于</a>
-        </li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="https://luxin-oi.github.io/post/ti-dan-suo-yin" class="mdui-list-item-content">题单</a>
-        </li>
-        
-    </ul>
-</div>
+<title>Miller_Rabin | luxin</title>
+<meta name="description" content="♥Andromeda♥">
 
-<div id="content" class="site-content">
-    <div id="primary" class="content-area">
-        <main id="main" class="site-main" role="main">
-            <article id="post-1270" class="post-1270 post type-post status-publish format-standard hentry category-90 category-129 tag-149">
-                <header class="entry-header">
-                    <h1 class="entry-title">Miller_Rabin</h1>
-                    <p class="entry-census">发布于 2020-03-05</p>
-                    <hr>
-                </header>
-                <div class="neko">
-                    <h3 id="miller_rabin"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>M</mi><mi>i</mi><mi>l</mi><mi>l</mi><mi>e</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">Miller</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span>_<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mi>a</mi><mi>b</mi><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">Rabin</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span></h3>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://luxin-oi.github.io//favicon.ico?v=1583903605184">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://luxin-oi.github.io//styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://luxin-oi.github.io/">luxin</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="https://luxin-oi.github.io/post/ti-dan-suo-yin" class="menu">
+                题单
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>Miller_Rabin</h1>
+            <p class="article-meta">
+              2020-03-05
+              
+                <a href="https://luxin-oi.github.io/tag/siQEGz8oc/" class="badge ">
+                  数学
+                </a>
+              
+                <a href="https://luxin-oi.github.io/tag/KERCPxCMT2/" class="badge ">
+                  模板
+                </a>
+              
+            </p>
+            
+              <img src="http://m.qpic.cn/psc?/V12tF7TF3mJgwd/QBzlzF8iG*2NtSQ2AaEAUlF*adu4828UCfql9GcJgAxOd7IcLU7RDt01WaWSejua0zyh3K6IbbZKhcfhvG3OXQ!!/b&amp;bo=wwLoA8MC6AMRCT4!&amp;rf=viewer_4" alt="Miller_Rabin">
+            
+            <div class="post-content">
+              <h3 id="miller_rabin"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>M</mi><mi>i</mi><mi>l</mi><mi>l</mi><mi>e</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">Miller</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span>_<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mi>a</mi><mi>b</mi><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">Rabin</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span></h3>
 <h3 id="理论基础">理论基础</h3>
 <h4 id="费马小定理ap-1equiv-1mod-p">费马小定理：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>≡</mo><mn>1</mn><mo>(</mo><mspace></mspace><mspace width="0.6666666666666666em"/><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mtext> </mtext><mtext> </mtext><mi>p</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">a^{p-1}\equiv 1(\mod p)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≡</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mopen">(</span><span class="mspace allowbreak"></span><span class="mspace" style="margin-right:0.6666666666666666em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">m</span><span class="mord mathrm">o</span><span class="mord mathrm">d</span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">p</span><span class="mclose">)</span></span></span></span></h4>
 <p>证明如下:考虑<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mn>3</mn><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><mi>p</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">1,2,3,...,p-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>这<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">p-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7777700000000001em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>个数字，同时乘<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>，得到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mn>2</mn><mi>a</mi><mo separator="true">,</mo><mn>3</mn><mi>a</mi><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><mo>(</mo><mi>p</mi><mo>−</mo><mn>1</mn><mo>)</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">a,2a,3a,...,(p-1)a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">3</span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord mathdefault">a</span></span></span></span></p>
@@ -131,45 +184,221 @@ bool miller_rabin(ll x){
 }
 </code></pre>
 
-                </div>
-            </article>
-        </main>
-    </div>
-    <div class="doc-footer-nav mdui-color-theme">
-        <div class="mdui-container">
-            <div class="mdui-row">
-                
-                <a href="https://luxin-oi.github.io/post/isap/" class="mdui-ripple mdui-color-theme mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left">
-                    <div class="doc-footer-nav-text">
-                        <i class="mdui-icon material-icons">arrow_back</i>
-                        <span class="doc-footer-nav-direction mdui-hidden-xs-down">上一篇文章</span>
-                        <div class="doc-footer-nav-chapter mdui-hidden-xs-down">ISAP</div>
-                    </div>
-                </a>
-                
-                
-                <a href="https://luxin-oi.github.io/post/wang-zhan-zhan/" class="mdui-ripple mdui-color-theme mdui-col-xs-10 mdui-col-sm-6 doc-footer-nav-right">
-                    <div class="doc-footer-nav-text">
-                        <i class="mdui-icon material-icons">arrow_forward</i>
-                        <span class="doc-footer-nav-direction">下一篇文章</span>
-                        <div class="doc-footer-nav-chapter">网站站呀</div>
-                    </div>
-                </a>
-                
             </div>
+          </article>
         </div>
-    </div>
-    <br>
-    
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://luxin-oi.github.io/post/wang-zhan-zhan/">
+                <h3 class="post-title">
+                  网站站呀
+                </h3>
+              </a>
+            </div>
+          
+        </div>
         
-            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
 
-<div id="gitalk-container"></div>
+          
+        
+      </div>
 
-<script>
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://luxin-oi.github.io//images/avatar.png?v=1583903605184" class="no-responsive avatar">
+    <div class="text-muted">♥Andromeda♥</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/lifting-the-stone/">Lifting the Stone</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/you-can-solve-a-geometry-problem-too/">You can Solve a Geometry Problem too</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/wang-luo-liu/">网络流</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/uoj-ti-dan/">UOJ题单</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/ti-dan-suo-yin/">题单索引</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/atcoder-ti-dan/">Atcoder题单</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/cf-ti-dan/">CF题单</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/hdu-ti-dan/">HDU题单</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/bzoj-ti-dan/">BZOJ题单</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/poj-ti-dan/">POJ题单</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://luxin-oi.github.io/tag/85DztP89b8/" class="badge ">
+          hdu
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/PJ7xCvoFn/" class="badge warning">
+          计算几何
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/-p_9VOJ5I/" class="badge warning">
+          暴力
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/KtfFdo7cG/" class="badge secondary">
+          题单
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/pP3deGIEQ/" class="badge secondary">
+          网络流
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/kYstlox_XS/" class="badge secondary">
+          图论
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/_wSiMrkmu/" class="badge secondary">
+          总结
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/-Rh9xu2bB/" class="badge secondary">
+          数据结构
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/KERCPxCMT2/" class="badge success">
+          模板
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/siQEGz8oc/" class="badge ">
+          数学
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/m-756zIIR/" class="badge secondary">
+          else
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+     | <a class="rss" href="https://luxin-oi.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
 
-    var gitalk = new Gitalk({
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
         clientID: '3dd0e4026cfbe60780d9',
         clientSecret: '28d1aba10ffa097bbfb31253fb3676866783cc2f',
         repo: 'luxin-oi.github.io',
@@ -177,85 +406,17 @@ bool miller_rabin(ll x){
         admin: ['luxin-oi'],
         id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
         distractionFreeMode: false  // Facebook-like distraction free mode
-    })
+      })
 
-    gitalk.render('gitalk-container')
+      gitalk.render('gitalk-container')
 
-</script>
+    </script>
+  
 
-        
+  
 
-        
-    
-    <div class="comment"></div>
-</div>
-<footer class="mdui-container footer ">
-    <div class="head_card-offset"></div>
-    <div class="mdui-row mdui-row-gapless">
-        <div class="k-container">
-            <img width="100%" src="/media/img/skirt.png">
-        </div>
-    </div>
 
-    <div class="site-info">
-        
-    </div>
-</footer>
-<div id="landlord" style="left:5px;bottom:0px;">
-    <div class="message" style="opacity:0"></div>
-    <canvas id="live2d" width="500" height="560" class="live2d"></canvas>
-    <div class="live_talk_input_body">
-        <div class="live_talk_input_name_body">
-            <input name="name" type="text" class="live_talk_name white_input" id="AIuserName" autocomplete="off" placeholder="你的名字" />
-        </div>
-        <div class="live_talk_input_text_body">
-            <input name="talk" type="text" class="live_talk_talk white_input" id="AIuserText" autocomplete="off" placeholder="要和我聊什么呀？"/>
-            <button type="button" class="live_talk_send_btn" id="talk_send">发送</button>
-        </div>
-    </div>
-    <input name="live_talk" id="live_talk" value="1" type="hidden" />
-    <div class="live_ico_box">
-        <div class="live_ico_item type_info" id="showInfoBtn"></div>
-        <div class="live_ico_item type_talk" id="showTalkBtn"></div>
-        <div class="live_ico_item type_music" id="musicButton"></div>
-        <div class="live_ico_item type_youdu" id="youduButton"></div>
-        <div class="live_ico_item type_quit" id="hideButton"></div>
-        <input name="live_statu_val" id="live_statu_val" value="0" type="hidden" />
-        <audio src="" style="display:none;" id="live2d_bgm" data-bgm="0" preload="none"></audio>
-        <input name="live2dBGM" value="https://img.apa70.com/123.mp3" type="hidden">
-        <input name="live2dBGM" value="https://img.apa70.com/123.mp3" type="hidden">
-        <input id="duType" value="douqilai,l2d_caihong" type="hidden">
-    </div>
-</div>
-<div id="open_live2d">召唤伊斯特瓦尔</div>
-<script>
-    var message_Path = '/media/live2d/';//资源目录，如果目录不对请更改
-    var talkAPI = "";//如果有类似图灵机器人的聊天接口请填写接口路径
-</script>
-<!--<script src="/media/js/jquery-3.3.1.min.js"></script>-->
-<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script type="text/javascript" src="/media/live2d/js/live2d.js"></script>
-<script type="text/javascript" src="/media/live2d/js/message.js"></script>
 
-</body>
-<script src="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script>
-    $('.comment').bind('DOMNodeInserted',()=>{
-        $('.comment').unbind()
 
-        $('.vbtn').addClass(' mdui-btn mdui-color-theme-accent mdui-ripple')
-    })
-
-    let valine = new Valine({
-        el: '.comment',
-        
-        
-        
-        path: window.location.pathname,
-        pageSize: 30,
-        avatar:'mm',
-        notify:true
-    })
-</script>
+  </body>
 </html>

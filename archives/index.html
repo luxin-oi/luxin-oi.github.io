@@ -1,462 +1,489 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>luxin</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="stylesheet" href="/styles/main.css">
-    <link rel="stylesheet" href="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/css/mdui.min.css">
-    <link rel="stylesheet" href="/media/live2d/css/live2d.css" />
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>文章归档 | luxin</title>
+<meta name="description" content="♥Andromeda♥">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://luxin-oi.github.io//favicon.ico?v=1583903605184">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://luxin-oi.github.io//styles/main.css">
+
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://luxin-oi.github.io/">luxin</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="https://luxin-oi.github.io/post/ti-dan-suo-yin" class="menu">
+                题单
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
     
-</head>
-<body class=" mdui-appbar-with-toolbar  mdui-theme-primary-pink mdui-theme-accent-pink">
-<header class="mdui-toolbar mdui-color-pink mdui-appbar-fixed mdui-appbar-scroll-toolbar-hide" style="z-index: 1000">
-    <a href="javascript:;" mdui-drawer="{target: '#left-drawer',overlay:true}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
-    <span class="mdui-typo-title">luxin</span>
-    <div class="mdui-toolbar-spacer"></div>
-<!--    <a href="javascript:history.go(0);" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
-    <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
-</header>
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          
 
-<div class="mdui-drawer mdui-color-white mdui-drawer-full-height mdui-drawer-close" id="left-drawer">
-    <ul class="mdui-list">
-        <li class="mdui-subheader">菜单</li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/" class="mdui-list-item-content">首页</a>
-        </li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/archives" class="mdui-list-item-content">归档</a>
-        </li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/tags" class="mdui-list-item-content">标签</a>
-        </li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="/post/about" class="mdui-list-item-content">关于</a>
-        </li>
-        
-        <li class="mdui-list-item mdui-ripple">
-            <a href="https://luxin-oi.github.io/post/ti-dan-suo-yin" class="mdui-list-item-content">题单</a>
-        </li>
-        
-    </ul>
+          <h2 class="archives-title">文章归档</h2>
+          <div class="archives-container">
+            
+              <h3 class="year" data-aos-delay="500">2020</h3>
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/lifting-the-stone/">
+                      <h4 class="post-title">
+                        Lifting the Stone
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/you-can-solve-a-geometry-problem-too/">
+                      <h4 class="post-title">
+                        You can Solve a Geometry Problem too
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/wang-luo-liu/">
+                      <h4 class="post-title">
+                        网络流
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/uoj-ti-dan/">
+                      <h4 class="post-title">
+                        UOJ题单
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/ti-dan-suo-yin/">
+                      <h4 class="post-title">
+                        题单索引
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/atcoder-ti-dan/">
+                      <h4 class="post-title">
+                        Atcoder题单
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/cf-ti-dan/">
+                      <h4 class="post-title">
+                        CF题单
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/hdu-ti-dan/">
+                      <h4 class="post-title">
+                        HDU题单
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/bzoj-ti-dan/">
+                      <h4 class="post-title">
+                        BZOJ题单
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/poj-ti-dan/">
+                      <h4 class="post-title">
+                        POJ题单
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/tu-lun-zong-jie-wei/">
+                      <h4 class="post-title">
+                        图论总结（伪）
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/splay-wei-hu-xu-lie/">
+                      <h4 class="post-title">
+                        Splay维护序列
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/zui-xiao-yuan-fu-gai-sui-ji-zeng-liang/">
+                      <h4 class="post-title">
+                        最小圆覆盖（随机增量）
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/xuan-zhuan-qia-ke/">
+                      <h4 class="post-title">
+                        旋转卡壳
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/er-wei-tu-bao/">
+                      <h4 class="post-title">
+                        二维凸包
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/dinic/">
+                      <h4 class="post-title">
+                        Dinic
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/isap/">
+                      <h4 class="post-title">
+                        ISAP
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/miller_rabin/">
+                      <h4 class="post-title">
+                        Miller_Rabin
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/wang-zhan-zhan/">
+                      <h4 class="post-title">
+                        网站站呀
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://luxin-oi.github.io/post/thuwc2016-ding-xiang-yue-ye/">
+                      <h4 class="post-title">
+                        THUWC2016 定向越野
+                      </h4>
+                    </a>
+                  </article>
+                
+              
+            
+          </div>
+        </div>
+        <div class="row flex-edges">
+  
+  
 </div>
 
-<div class="mdui-container">
-    <div class="mdui-row">
-        <div class="mdui-col-md-10 mdui-col-offset-md-1 ">
-            
-            
-                <div class="mdui-typo-display-1 mdui-m-b-2 mdui-m-l-1">
-                    <div class="mdui-row">
-                        <div class="mdui-col-xs-12">2020</div>
-                    </div>
-                    <div class="mdui-row">
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src="/media/img/bai.jpg"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">Lifting the Stone</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-11</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/lifting-the-stone/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src="/media/img/bai.jpg"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">You can Solve a Geometry Problem too</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-11</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/you-can-solve-a-geometry-problem-too/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src=" http://r.photo.store.qq.com/psc?/V12tF7TF3mJgwd/lwLYosea*1Tx8aEGf3rTECTfHTOxZwETOhSk1RA0PDgWxbLx32K7viNQAVr7IoSSoy7.fbhoM9lQY70yGG4nrhuttXAhlmAISTRHkkPJf88!/r"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">网络流</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-06</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/wang-luo-liu/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src=" http://a1.qpic.cn/psc?/V12tF7TF1eR18A/QBzlzF8iG*2NtSQ2AaEAUiuQSHgUmaL7LCp6qCpDJVNhDcW8joOY*ZhrS1ZwN3KD2ELcqifAOMNvEE4fXFn3og!!/m&amp;ek=1&amp;kp=1&amp;pt=0&amp;bo=UAOwBAAAAAARF8c!&amp;tl=3&amp;vuin=1972969785&amp;tm=1583341200&amp;sce=60-4-3&amp;rf=0-0"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">UOJ题单</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-05</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/uoj-ti-dan/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src=" http://m.qpic.cn/psc?/V12tF7TF3mJgwd/QBzlzF8iG*2NtSQ2AaEAUkJC5C2t9UJ.QaN9HHbOWFb3qKtP1VTrOf1QEMis9BVkWlLchypjfzb26xxPX72PPw!!/mnull&amp;bo=sATABLAEwAQRCT4!&amp;rf=photolist&amp;t=5"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">题单索引</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-05</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/ti-dan-suo-yin/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src=" http://m.qpic.cn/psc?/V12tF7TF3mJgwd/QBzlzF8iG*2NtSQ2AaEAUv.A1cirEqbgb.axhh7p16Y5yROyDSAcZ2KYKhL5ySFCBpUCbhRoVoRapFVbBAPNyQ!!/mnull&amp;bo=QAZ3Bk4LsgsRCfU!&amp;rf=photolist&amp;t=5"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">Atcoder题单</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-05</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/atcoder-ti-dan/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src=" http://b316.photo.store.qq.com/psb?/V12tF7TF3mJgwd/CRHrL73qp292gx9yTS2otwZqy*YuVdETN8zH0LDhJdw!/m/dDwBAAAAAAAAnull&amp;bo=NwONBDcDjQQRCT4!&amp;rf=photolist&amp;t=5"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">CF题单</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-05</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/cf-ti-dan/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src=" http://b281.photo.store.qq.com/psb?/V12tF7TF3mJgwd/cnfdvcMGGqcjfYpGjOUWS3z9ou*rRSBULcNPXE9GNUI!/m/dBkBAAAAAAAAnull&amp;bo=yADIAMgAyAARCT4!&amp;rf=photolist&amp;t=5"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">HDU题单</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-05</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/hdu-ti-dan/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src=" http://b209.photo.store.qq.com/psb?/V12tF7TF3mJgwd/nWu98GDb9szmirqY.KwfAhN8j7RNpG59eFuYBLRrupo!/m/dNEAAAAAAAAAnull&amp;bo=gAKIAwAAAAARBzk!&amp;rf=photolist&amp;t=5"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">BZOJ题单</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-05</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/bzoj-ti-dan/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src=" http://b159.photo.store.qq.com/psb?/V12tF7TF3mJgwd/mB61fUl5MMxJaVIQTwV05b*SeFSispAhz6bHLoV3QPE!/m/dJ8AAAAAAAAAnull&amp;bo=UAI7AwAAAAARB1o!&amp;rf=photolist&amp;t=5"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">POJ题单</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-05</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/poj-ti-dan/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src=" http://b159.photo.store.qq.com/psb?/V12tF7TF3mJgwd/YU92eRmgggQjfe7UA5p4LpPrj7DTmA2vKgbBNYloBAM!/m/dJ8AAAAAAAAAnull&amp;bo=yADIAMgAyAARCT4!&amp;rf=photolist&amp;t=5"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">图论总结（伪）</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-05</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/tu-lun-zong-jie-wei/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src=" http://m.qpic.cn/psc?/V12tF7TF3mJgwd/QBzlzF8iG*2NtSQ2AaEAUlf*KvV3BXVmqE3HuAq2tuApOg*.qC216dg0OZPQC4WF2Qj9MT7rQFAqN1p04K2lOA!!/mnull&amp;bo=QAZKBn0IiwgRCcI!&amp;rf=photolist&amp;t=5"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">Splay维护序列</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-05</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/splay-wei-hu-xu-lie/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src=" http://m.qpic.cn/psc?/V12tF7TF3mJgwd/QBzlzF8iG*2NtSQ2AaEAUrFNqvniPA98HvNKPXqKc5FYZTS4qNKddpQI**SodvxUUo9xmdmR8VtzLf7TGvdnJw!!/mnull&amp;bo=egKwBHoCsAQRCT4!&amp;rf=photolist&amp;t=5"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">最小圆覆盖（随机增量）</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-05</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/zui-xiao-yuan-fu-gai-sui-ji-zeng-liang/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src=" http://m.qpic.cn/psc?/V12tF7TF3mJgwd/QBzlzF8iG*2NtSQ2AaEAUot4v7HGdHLYdp36CL.YNvQM2CvsH6P3tOmn0YpI0f*w07y0njd970iwOcM*Jspe9A!!/mnull&amp;bo=pALeA6QC3gMDCSw!&amp;rf=photolist&amp;t=5"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">旋转卡壳</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-05</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/xuan-zhuan-qia-ke/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src=" http://b216.photo.store.qq.com/psb?/V12tF7TF3mJgwd/zJf0Bl4R9KJ6UdSOi*F3OzVN3fubUhbzwekoL1CxnG4!/m/dNgAAAAAAAAAnull&amp;bo=yADIAMgAyAARCT4!&amp;rf=photolist&amp;t=5"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">二维凸包</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-05</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/er-wei-tu-bao/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src=" http://b290.photo.store.qq.com/psb?/V12tF7TF3mJgwd/zEvLl2J7Ug8OixKJULV3pwLg0HZj*aPOkZ9s.CWQk*k!/m/dCIBAAAAAAAAnull&amp;bo=yADIAMgAyAARCT4!&amp;rf=photolist&amp;t=5"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">Dinic</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-05</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/dinic/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src=" http://m.qpic.cn/psc?/V12tF7TF3mJgwd/QBzlzF8iG*2NtSQ2AaEAUhBhFqTyfkwfGG05dkLmCKrrqhPvOYw8MGFhCak7nBwHGriuOGsjHdMX8p5pjSQQYA!!/mnull&amp;bo=wwLoA8MC6AMRCT4!&amp;rf=photolist&amp;t=5"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">ISAP</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-05</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/isap/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src=" http://m.qpic.cn/psc?/V12tF7TF3mJgwd/QBzlzF8iG*2NtSQ2AaEAUlF*adu4828UCfql9GcJgAxOd7IcLU7RDt01WaWSejua0zyh3K6IbbZKhcfhvG3OXQ!!/b&amp;bo=wwLoA8MC6AMRCT4!&amp;rf=viewer_4"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">Miller_Rabin</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-05</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/miller_rabin/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src=" http://m.qpic.cn/psc?/V12tF7TF3mJgwd/QBzlzF8iG*2NtSQ2AaEAUuoWU1i7YGdM58EaffijDrm1pbwvj9aXXAmWfw1hM9YnrQZI*OYT6DgKMIKmli9wsA!!/b&amp;bo=IANuBCADbgQDCSw!&amp;rf=viewer_4"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">网站站呀</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-04</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/wang-zhan-zhan/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                            <div class="mdui-col-xs-6 mdui-p-a-1">
-                                <div class="mdui-card">
-                                    <div class="mdui-card-media">
-                                        <img width=536px height=300px src=" http://m.qpic.cn/psc?/V12tF7TF3mJgwd/QBzlzF8iG*2NtSQ2AaEAUtZpVigsWdJrerpn7ImBTMOFGtklXiDg.*7fhD*wIh7bEUyRMD3vzhW1dY1ZCUyjaQ!!/b&amp;bo=hQINAoUCDQIRCT4!&amp;rf=viewer_4"/>
-                                        <div class="mdui-card-primary">
-                                            <div class="mdui-card-primary-title">THUWC2016 定向越野</div>
-                                            <div class="mdui-card-primary-subtitle">2020-03-03</div>
-                                        </div>
-                                    </div>
-                                    <div class="mdui-card-actions" style="float:right;">
-                                        <a href="https://luxin-oi.github.io/post/thuwc2016-ding-xiang-yue-ye/" class="mdui-btn mdui-color-theme-accent mdui-ripple">点击查看</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                    </div>
-                </div>
-            
-        </div>
-    </div>
-    <div class="mdui-row">
+      </div>
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://luxin-oi.github.io//images/avatar.png?v=1583903605184" class="no-responsive avatar">
+    <div class="text-muted">♥Andromeda♥</div>
+    <div class="social-container">
+      
         
-
-    </div>
-</div>
-<footer class="mdui-container footer ">
-    <div class="head_card-offset"></div>
-    <div class="mdui-row mdui-row-gapless">
-        <div class="k-container">
-            <img width="100%" src="/media/img/skirt.png">
-        </div>
-    </div>
-
-    <div class="site-info">
+      
         
+      
+        
+      
+        
+      
+        
+      
     </div>
-</footer>
-<div id="landlord" style="left:5px;bottom:0px;">
-    <div class="message" style="opacity:0"></div>
-    <canvas id="live2d" width="500" height="560" class="live2d"></canvas>
-    <div class="live_talk_input_body">
-        <div class="live_talk_input_name_body">
-            <input name="name" type="text" class="live_talk_name white_input" id="AIuserName" autocomplete="off" placeholder="你的名字" />
-        </div>
-        <div class="live_talk_input_text_body">
-            <input name="talk" type="text" class="live_talk_talk white_input" id="AIuserText" autocomplete="off" placeholder="要和我聊什么呀？"/>
-            <button type="button" class="live_talk_send_btn" id="talk_send">发送</button>
-        </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
     </div>
-    <input name="live_talk" id="live_talk" value="1" type="hidden" />
-    <div class="live_ico_box">
-        <div class="live_ico_item type_info" id="showInfoBtn"></div>
-        <div class="live_ico_item type_talk" id="showTalkBtn"></div>
-        <div class="live_ico_item type_music" id="musicButton"></div>
-        <div class="live_ico_item type_youdu" id="youduButton"></div>
-        <div class="live_ico_item type_quit" id="hideButton"></div>
-        <input name="live_statu_val" id="live_statu_val" value="0" type="hidden" />
-        <audio src="" style="display:none;" id="live2d_bgm" data-bgm="0" preload="none"></audio>
-        <input name="live2dBGM" value="https://img.apa70.com/123.mp3" type="hidden">
-        <input name="live2dBGM" value="https://img.apa70.com/123.mp3" type="hidden">
-        <input id="duType" value="douqilai,l2d_caihong" type="hidden">
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/lifting-the-stone/">Lifting the Stone</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/you-can-solve-a-geometry-problem-too/">You can Solve a Geometry Problem too</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/wang-luo-liu/">网络流</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/uoj-ti-dan/">UOJ题单</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/ti-dan-suo-yin/">题单索引</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/atcoder-ti-dan/">Atcoder题单</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/cf-ti-dan/">CF题单</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/hdu-ti-dan/">HDU题单</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/bzoj-ti-dan/">BZOJ题单</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://luxin-oi.github.io/post/poj-ti-dan/">POJ题单</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
     </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://luxin-oi.github.io/tag/85DztP89b8/" class="badge ">
+          hdu
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/PJ7xCvoFn/" class="badge success">
+          计算几何
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/-p_9VOJ5I/" class="badge success">
+          暴力
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/KtfFdo7cG/" class="badge secondary">
+          题单
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/pP3deGIEQ/" class="badge warning">
+          网络流
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/kYstlox_XS/" class="badge secondary">
+          图论
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/_wSiMrkmu/" class="badge secondary">
+          总结
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/-Rh9xu2bB/" class="badge secondary">
+          数据结构
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/KERCPxCMT2/" class="badge secondary">
+          模板
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/siQEGz8oc/" class="badge secondary">
+          数学
+        </a>
+      
+        <a href="https://luxin-oi.github.io/tag/m-756zIIR/" class="badge warning">
+          else
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+     | <a class="rss" href="https://luxin-oi.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
 </div>
-<div id="open_live2d">召唤伊斯特瓦尔</div>
-<script>
-    var message_Path = '/media/live2d/';//资源目录，如果目录不对请更改
-    var talkAPI = "";//如果有类似图灵机器人的聊天接口请填写接口路径
+
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
 </script>
-<!--<script src="/media/js/jquery-3.3.1.min.js"></script>-->
-<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script type="text/javascript" src="/media/live2d/js/live2d.js"></script>
-<script type="text/javascript" src="/media/live2d/js/message.js"></script>
 
-</body>
-<script src="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
+
+
+
+  </body>
 </html>
